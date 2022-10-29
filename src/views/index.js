@@ -25,10 +25,10 @@ const Main = () => {
           }}
         >
           <Tabs defaultActiveKey="1">
-            <Tabs.TabPane tab="Input" key="1">
+            <Tabs.TabPane tab="Nhập thông tin" key="1" >
               <Tab1 />
             </Tabs.TabPane>
-            <Tabs.TabPane tab="Output" key="2">
+            <Tabs.TabPane tab="Hiển thị kết quả" key="2">
               <Tab2 />
             </Tabs.TabPane>
           </Tabs>

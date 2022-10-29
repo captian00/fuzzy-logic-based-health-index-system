@@ -6,7 +6,7 @@ import Main from "./views";
 function App() {
   return (
     <div className="App ">
-      <PageHeader style={{fontSize:'40px'}}>Hệ Thống Đánh Giá Chỉ Số Sức Khỏe</PageHeader>
+      <PageHeader style={{fontSize:'30px'}}>Hệ Thống Đánh Giá Chỉ Số Sức Khỏe</PageHeader>
       <Main />
     </div>
   );

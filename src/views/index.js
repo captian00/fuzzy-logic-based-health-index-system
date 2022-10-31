@@ -25,7 +25,7 @@ const Main = () => {
           }}
         >
           <Tabs defaultActiveKey="1">
-            <Tabs.TabPane tab="Nhập thông tin" key="1" >
+            <Tabs.TabPane tab="Nhập thông tin" key="1">
               <Tab1 />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hiển thị kết quả" key="2">

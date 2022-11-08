@@ -46,7 +46,6 @@ const Tab1 = () => {
           min={0}
           onChange={(val) => setHeight(val)}
           style={{ borderRadius: "0.25rem", width: "250px" }}
-          max={10}
         />
       </Form.Item>
       <Form.Item

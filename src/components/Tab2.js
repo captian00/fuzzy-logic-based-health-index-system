@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Scatter } from "react-chartjs-2";
 import { useMainContext } from "../common/context";
 
 ChartJS.register(
@@ -22,7 +22,208 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const data = {
+  datasets: [
+    {
+      label: "Rất thấp",
+      data: [
+        {
+          x: 145,
+          y: 1,
+        },
+        {
+          x: 150,
+          y: 1,
+        },
+        {
+          x: 155,
+          y: 0,
+        },
+      ],
+      borderColor: "red",
+      borderWidth: 2,
+      backgroundColor: "red",
+      pointBackgroundColor: "red",
+      pointBorderColor: "red",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      fill: false,
+      tension: 0,
+      showLine: true,
+    },
+    {
+      label: "Thấp",
+      data: [
+        {
+          x: 150,
+          y: 0,
+        },
+        {
+          x: 155,
+          y: 1,
+        },
+        {
+          x: 160,
+          y: 1,
+        },
+        {
+          x: 165,
+          y: 0,
+        },
+      ],
+      borderColor: "blue",
+      borderWidth: 2,
+      backgroundColor: "blue",
+      pointBackgroundColor: "blue",
+      pointBorderColor: "blue",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      fill: false,
+      tension: 0,
+      showLine: true,
+    },
+
+    {
+      label: "Trung bình",
+      data: [
+        {
+          x: 160,
+          y: 0,
+        },
+        {
+          x: 165,
+          y: 1,
+        },
+        {
+          x: 173,
+          y: 1,
+        },
+        {
+          x: 175,
+          y: 0,
+        },
+      ],
+      borderColor: "green",
+      borderWidth: 2,
+      backgroundColor: "green",
+      pointBackgroundColor: "green",
+      pointBorderColor: "green",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      fill: false,
+      tension: 0,
+      showLine: true,
+    },
+    {
+      label: "Cao",
+      data: [
+        {
+          x: 173,
+          y: 0,
+        },
+        {
+          x: 175,
+          y: 1,
+        },
+        {
+          x: 180,
+          y: 1,
+        },
+        {
+          x: 185,
+          y: 0,
+        },
+      ],
+      borderColor: "orange",
+      borderWidth: 2,
+      backgroundColor: "orange",
+      pointBackgroundColor: "orange",
+      pointBorderColor: "orange",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      fill: false,
+      tension: 0,
+      showLine: true,
+    },
+    {
+      label: "Rất cao",
+      data: [
+        {
+          x: 180,
+          y: 0,
+        },
+        {
+          x: 185,
+          y: 1,
+        },
+        {
+          x: 190,
+          y: 1,
+        },
+      ],
+      borderColor: "purple",
+      borderWidth: 2,
+      backgroundColor: "purple",
+      pointBackgroundColor: "purple",
+      pointBorderColor: "purple",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      fill: false,
+      tension: 0,
+      showLine: true,
+    },
+    {
+      data: [
+        {
+          x: 145,
+          y: 0.6,
+        },
+        {
+          x: 152,
+          y: 0.6,
+        },
+        {
+          x: 152,
+          y: 0,
+        },
+      ],
+      borderColor: "black",
+      borderWidth: 2,
+      backgroundColor: "black",
+      pointBackgroundColor: "black",
+      pointBorderColor: "black",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      showLine: true,
+    },
+    {
+      data: [
+        {
+          x: 145,
+          y: 0.4,
+        },
+        {
+          x: 152,
+          y: 0.4,
+        },
+        {
+          x: 152,
+          y: 0,
+        },
+      ],
+      borderColor: "black",
+      borderWidth: 2,
+      backgroundColor: "black",
+      pointBackgroundColor: "black",
+      pointBorderColor: "black",
+      pointRadius: 3,
+      pointHoverRadius: 5,
+      showLine: true,
+    },
+  ],
+};
+const options = {
+  tooltips: false,
   responsive: true,
   plugins: {
     legend: {
@@ -30,31 +231,35 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: "Chiều cao",
     },
   },
-};
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      // data: labels.map(() => Math.random()),
-      data: [, 0, 1, 1, 0],
-
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      // data: labels.map(() => Math.random()),
-      data: [, 1, 0, 0, 1],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
+  scales: {
+    xAxes: [
+      {
+        ticks: {
+          min: 140,
+          max: 200,
+        },
+        gridLines: {
+          color: "#888",
+          drawOnChartArea: false,
+        },
+      },
+    ],
+    yAxes: [
+      {
+        ticks: {
+          min: 0,
+          max: 1,
+        },
+        gridLines: {
+          color: "#888",
+          drawOnChartArea: false,
+        },
+      },
+    ],
+  },
 };
 
 const Tab2 = () => {
@@ -329,13 +534,7 @@ const Tab2 = () => {
   //logic
   return (
     <div className="">
-      <p>aaaaaaa</p>
-      <Line options={options} data={data} />
-      <p>aaaaaaa</p>
-      <Line options={options} data={data} />
-      {/* <p>aaaaaaa</p>
-      <Line options={options} data={data} /> <p>aaaaaaa</p>
-      <Line options={options} data={data} /> */}
+      <Scatter options={options} data={data}></Scatter>
     </div>
   );
 };

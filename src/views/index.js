@@ -33,10 +33,10 @@ const Main = () => {
               <Tab1 />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hiển thị kết quả" key="2">
-              <Graph1 />
-              <Graph2></Graph2>
-              <Graph4></Graph4>
-              <Graph3></Graph3>
+              <Tab2 />
+              <Tab3></Tab3>
+              <Tab4></Tab4>
+              <Tab5></Tab5>
             </Tabs.TabPane>
           </Tabs>
         </Context.Provider>

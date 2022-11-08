@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const Graph2 = () => {
+const Tab3 = () => {
   const { weight} = useMainContext();
   const [stateResultWeight, setStateResultWeight] = useState([]);
   const data = {
@@ -352,4 +352,4 @@ const Graph2 = () => {
     </div>
   );
 };
-export default Graph2;
+export default Tab3;

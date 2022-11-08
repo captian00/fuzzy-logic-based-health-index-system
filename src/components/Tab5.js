@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const Graph2 = () => {
+const Tab5 = () => {
   const { bloodPressure } = useMainContext();
   const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
   const data = {
@@ -254,4 +254,4 @@ const Graph2 = () => {
     </div>
   );
 };
-export default Graph2;
+export default Tab5;

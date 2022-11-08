@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const Graph2 = () => {
+const Tab4 = () => {
   const { heartBeat } = useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
   const data = {
@@ -257,4 +257,4 @@ const Graph2 = () => {
     </div>
   );
 };
-export default Graph2;
+export default Tab4;

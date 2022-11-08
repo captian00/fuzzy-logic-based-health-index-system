@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Tabs } from "antd";
 import Tab1 from "../components/Tab1";
 import Tab2 from "../components/Tab2";
+import Tab3 from "../components/Tab3";
+import Tab4 from "../components/Tab4";
+import Tab5 from "../components/Tab5";
 import { Context } from "../common/context";
+
 
 const Main = () => {
   const [weight, setWeight] = useState(0);
@@ -29,7 +33,10 @@ const Main = () => {
               <Tab1 />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hiển thị kết quả" key="2">
-              <Tab2 />
+              <Graph1 />
+              <Graph2></Graph2>
+              <Graph4></Graph4>
+              <Graph3></Graph3>
             </Tabs.TabPane>
           </Tabs>
         </Context.Provider>

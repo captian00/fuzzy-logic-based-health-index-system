@@ -22,27 +22,24 @@ ChartJS.register(
   Legend
 );
 
-const Graph1 = () => {
-  const { weight, height, heartBeat, bloodPressure } = useMainContext();
-  const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
-  const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
-  const [stateResultHeight, setStateResultHeight] = useState([]);
+const Graph2 = () => {
+  const { weight} = useMainContext();
   const [stateResultWeight, setStateResultWeight] = useState([]);
   const data = {
     datasets: [
       {
-        label: "Rất thấp",
+        label: "Rất nhẹ",
         data: [
           {
-            x: 145,
+            x: 40,
             y: 1,
           },
           {
-            x: 150,
+            x: 44,
             y: 1,
           },
           {
-            x: 155,
+            x: 49,
             y: 0,
           },
         ],
@@ -58,22 +55,22 @@ const Graph1 = () => {
         showLine: true,
       },
       {
-        label: "Thấp",
+        label: "Nhẹ",
         data: [
           {
-            x: 150,
+            x: 44,
             y: 0,
           },
           {
-            x: 155,
+            x: 52,
             y: 1,
           },
           {
-            x: 160,
+            x: 54,
             y: 1,
           },
           {
-            x: 165,
+            x: 59,
             y: 0,
           },
         ],
@@ -93,19 +90,19 @@ const Graph1 = () => {
         label: "Trung bình",
         data: [
           {
-            x: 160,
+            x: 54,
             y: 0,
           },
           {
-            x: 165,
+            x: 59,
             y: 1,
           },
           {
-            x: 173,
+            x: 66,
             y: 1,
           },
           {
-            x: 175,
+            x: 71,
             y: 0,
           },
         ],
@@ -121,22 +118,22 @@ const Graph1 = () => {
         showLine: true,
       },
       {
-        label: "Cao",
+        label: "Nặng",
         data: [
           {
-            x: 173,
+            x: 66,
             y: 0,
           },
           {
-            x: 175,
+            x: 71,
             y: 1,
           },
           {
-            x: 180,
+            x: 74,
             y: 1,
           },
           {
-            x: 185,
+            x: 79,
             y: 0,
           },
         ],
@@ -152,18 +149,18 @@ const Graph1 = () => {
         showLine: true,
       },
       {
-        label: "Rất cao",
+        label: "Rất nặng",
         data: [
           {
-            x: 180,
+            x: 74,
             y: 0,
           },
           {
-            x: 185,
+            x: 79,
             y: 1,
           },
           {
-            x: 190,
+            x: 85,
             y: 1,
           },
         ],
@@ -189,7 +186,7 @@ const Graph1 = () => {
       },
       title: {
         display: true,
-        text: "Chiều cao",
+        text: "Khối lượng cơ thể",
       },
     },
     scales: {
@@ -237,163 +234,6 @@ const Graph1 = () => {
   const leftTrapezoid = (x, c, d) => {
     return (x - c) / (d - c);
   };
-  const handleLogicBloodPressure = (bloodPressure) => {
-    let resultBloodPressure = [];
-    if (bloodPressure <= 80) {
-      resultBloodPressure.push({ result: 1, label: "T" });
-    }
-    if (80 < bloodPressure && bloodPressure < 90) {
-      resultBloodPressure.push({
-        result: rightTrapezoid(bloodPressure, 80, 90),
-        label: "T",
-      });
-      resultBloodPressure.push({
-        result: leftTrapezoid(bloodPressure, 80, 90),
-        label: "BT",
-      });
-    }
-
-    if (90 <= bloodPressure && bloodPressure <= 120) {
-      resultBloodPressure.push({
-        result: 1,
-        label: "BT",
-      });
-    }
-    if (120 < bloodPressure && bloodPressure < 130) {
-      resultBloodPressure.push({
-        result: rightTrapezoid(bloodPressure, 120, 130),
-        label: "BT",
-      });
-      resultBloodPressure.push({
-        result: leftTrapezoid(bloodPressure, 120, 130),
-        label: "C",
-      });
-    }
-    if (bloodPressure >= 130) {
-      resultBloodPressure.push({
-        result: 1,
-        label: "C",
-      });
-    }
-    return resultBloodPressure;
-  };
-
-  const handleLogicHeartBeat = (heartBeat) => {
-    let resultHeartBeat = [];
-    if (heartBeat <= 50) {
-      resultHeartBeat.push({ result: 1, label: "T" });
-    }
-    if (50 < heartBeat && heartBeat < 55) {
-      resultHeartBeat.push({
-        result: rightTrapezoid(heartBeat, 50, 55),
-        label: "T",
-      });
-    }
-    if (50 < heartBeat && heartBeat < 60) {
-      resultHeartBeat.push({
-        result: leftTrapezoid(heartBeat, 50, 60),
-        label: "BT",
-      });
-    }
-    if (60 <= heartBeat && heartBeat <= 100) {
-      resultHeartBeat.push({
-        result: 1,
-        label: "BT",
-      });
-    }
-    if (100 < heartBeat && heartBeat < 110) {
-      resultHeartBeat.push({
-        result: rightTrapezoid(heartBeat, 100, 110),
-        label: "BT",
-      });
-    }
-    if (105 < heartBeat && heartBeat < 110) {
-      resultHeartBeat.push({
-        result: leftTrapezoid(heartBeat, 105, 110),
-        label: "C",
-      });
-    }
-    if (heartBeat >= 110) {
-      resultHeartBeat.push({
-        result: 1,
-        label: "C",
-      });
-    }
-    return resultHeartBeat;
-  };
-  const handleLogicHeight = (height) => {
-    let resultHeight = [];
-    if (height <= 150) {
-      resultHeight.push({ result: 1, label: "RT" });
-    }
-    if (150 < height && height < 155) {
-      resultHeight.push({
-        result: rightTrapezoid(height, 150, 155),
-        label: "RT",
-      });
-      resultHeight.push({
-        result: leftTrapezoid(height, 150, 155),
-        label: "T",
-      });
-    }
-    if (155 <= height && height <= 160) {
-      resultHeight.push({
-        result: 1,
-        label: "T",
-      });
-    }
-    if (160 < height && height < 165) {
-      resultHeight.push({
-        result: rightTrapezoid(height, 160, 165),
-        label: "T",
-      });
-      resultHeight.push({
-        result: leftTrapezoid(height, 160, 165),
-        label: "TB",
-      });
-    }
-    if (165 <= height && height <= 173) {
-      resultHeight.push({
-        result: 1,
-        label: "TB",
-      });
-    }
-    if (173 < height && height < 175) {
-      resultHeight.push({
-        result: rightTrapezoid(height, 173, 175),
-        label: "TB",
-      });
-      resultHeight.push({
-        result: leftTrapezoid(height, 105, 110),
-        label: "C",
-      });
-    }
-    if (175 <= height && height <= 180) {
-      resultHeight.push({
-        result: 1,
-        label: "C",
-      });
-    }
-    if (180 < height && height < 185) {
-      resultHeight.push({
-        result: rightTrapezoid(height, 180, 185),
-        label: "C",
-      });
-      resultHeight.push({
-        result: leftTrapezoid(height, 180, 185),
-        label: "RC",
-      });
-    }
-
-    if (height >= 185) {
-      resultHeight.push({
-        result: 1,
-        label: "RC",
-      });
-    }
-    return resultHeight;
-  };
-
   const handleLogicWeight = (weight) => {
     let resultWeight = [];
     if (weight <= 44) {
@@ -468,27 +308,25 @@ const Graph1 = () => {
 
     return resultWeight;
   };
+  
   // handleLogicHeartBeat(55);
   useEffect(() => {
-    if (weight && height && heartBeat && bloodPressure) {
-      setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
-      setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
-      setStateResultHeight(handleLogicHeight(height));
+    if (weight) {
       setStateResultWeight(handleLogicWeight(weight));
       setStateDataUpdate(null);
       setDataFinal(data);
     }
-  }, [weight, height, heartBeat, bloodPressure]);
+  }, [weight]);
   const [stateDataUpdate, setStateDataUpdate] = useState(null);
 
   useEffect(() => {
     let dataUpdate = [];
-    stateResultHeight.map((item) => {
+    stateResultWeight.map((item) => {
       dataUpdate.push({
         data: [
-          { x: 145, y: item.result },
-          { x: height, y: item.result },
-          { x: height, y: 0 },
+          { x: 40, y: item.result },
+          { x: weight, y: item.result },
+          { x: weight, y: 0 },
         ],
         ...style,
       });
@@ -496,9 +334,6 @@ const Graph1 = () => {
     setStateDataUpdate(dataUpdate);
   }, [
     stateResultWeight,
-    stateResultHeight,
-    stateResultBloodPressure,
-    stateResultHeartBeat,
   ]);
 
   useEffect(() => {
@@ -517,4 +352,4 @@ const Graph1 = () => {
     </div>
   );
 };
-export default Graph1;
+export default Graph2;

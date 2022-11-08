@@ -22,253 +22,214 @@ ChartJS.register(
   Legend
 );
 
-const data = {
-  datasets: [
-    {
-      label: "Rất thấp",
-      data: [
-        {
-          x: 145,
-          y: 1,
-        },
-        {
-          x: 150,
-          y: 1,
-        },
-        {
-          x: 155,
-          y: 0,
-        },
-      ],
-      borderColor: "red",
-      borderWidth: 2,
-      backgroundColor: "red",
-      pointBackgroundColor: "red",
-      pointBorderColor: "red",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      fill: false,
-      tension: 0,
-      showLine: true,
-    },
-    {
-      label: "Thấp",
-      data: [
-        {
-          x: 150,
-          y: 0,
-        },
-        {
-          x: 155,
-          y: 1,
-        },
-        {
-          x: 160,
-          y: 1,
-        },
-        {
-          x: 165,
-          y: 0,
-        },
-      ],
-      borderColor: "blue",
-      borderWidth: 2,
-      backgroundColor: "blue",
-      pointBackgroundColor: "blue",
-      pointBorderColor: "blue",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      fill: false,
-      tension: 0,
-      showLine: true,
-    },
-
-    {
-      label: "Trung bình",
-      data: [
-        {
-          x: 160,
-          y: 0,
-        },
-        {
-          x: 165,
-          y: 1,
-        },
-        {
-          x: 173,
-          y: 1,
-        },
-        {
-          x: 175,
-          y: 0,
-        },
-      ],
-      borderColor: "green",
-      borderWidth: 2,
-      backgroundColor: "green",
-      pointBackgroundColor: "green",
-      pointBorderColor: "green",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      fill: false,
-      tension: 0,
-      showLine: true,
-    },
-    {
-      label: "Cao",
-      data: [
-        {
-          x: 173,
-          y: 0,
-        },
-        {
-          x: 175,
-          y: 1,
-        },
-        {
-          x: 180,
-          y: 1,
-        },
-        {
-          x: 185,
-          y: 0,
-        },
-      ],
-      borderColor: "orange",
-      borderWidth: 2,
-      backgroundColor: "orange",
-      pointBackgroundColor: "orange",
-      pointBorderColor: "orange",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      fill: false,
-      tension: 0,
-      showLine: true,
-    },
-    {
-      label: "Rất cao",
-      data: [
-        {
-          x: 180,
-          y: 0,
-        },
-        {
-          x: 185,
-          y: 1,
-        },
-        {
-          x: 190,
-          y: 1,
-        },
-      ],
-      borderColor: "purple",
-      borderWidth: 2,
-      backgroundColor: "purple",
-      pointBackgroundColor: "purple",
-      pointBorderColor: "purple",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      fill: false,
-      tension: 0,
-      showLine: true,
-    },
-    {
-      data: [
-        {
-          x: 145,
-          y: 0.6,
-        },
-        {
-          x: 152,
-          y: 0.6,
-        },
-        {
-          x: 152,
-          y: 0,
-        },
-      ],
-      borderColor: "black",
-      borderWidth: 2,
-      backgroundColor: "black",
-      pointBackgroundColor: "black",
-      pointBorderColor: "black",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      showLine: true,
-    },
-    {
-      data: [
-        {
-          x: 145,
-          y: 0.4,
-        },
-        {
-          x: 152,
-          y: 0.4,
-        },
-        {
-          x: 152,
-          y: 0,
-        },
-      ],
-      borderColor: "black",
-      borderWidth: 2,
-      backgroundColor: "black",
-      pointBackgroundColor: "black",
-      pointBorderColor: "black",
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      showLine: true,
-    },
-  ],
-};
-const options = {
-  tooltips: false,
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Chiều cao",
-    },
-  },
-  scales: {
-    xAxes: [
-      {
-        ticks: {
-          min: 140,
-          max: 200,
-        },
-        gridLines: {
-          color: "#888",
-          drawOnChartArea: false,
-        },
-      },
-    ],
-    yAxes: [
-      {
-        ticks: {
-          min: 0,
-          max: 1,
-        },
-        gridLines: {
-          color: "#888",
-          drawOnChartArea: false,
-        },
-      },
-    ],
-  },
-};
-
 const Tab2 = () => {
   const { weight, height, heartBeat, bloodPressure } = useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
   const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
   const [stateResultHeight, setStateResultHeight] = useState([]);
   const [stateResultWeight, setStateResultWeight] = useState([]);
+  const data = {
+    datasets: [
+      {
+        label: "Rất thấp",
+        data: [
+          {
+            x: 145,
+            y: 1,
+          },
+          {
+            x: 150,
+            y: 1,
+          },
+          {
+            x: 155,
+            y: 0,
+          },
+        ],
+        borderColor: "red",
+        borderWidth: 2,
+        backgroundColor: "red",
+        pointBackgroundColor: "red",
+        pointBorderColor: "red",
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        fill: false,
+        tension: 0,
+        showLine: true,
+      },
+      {
+        label: "Thấp",
+        data: [
+          {
+            x: 150,
+            y: 0,
+          },
+          {
+            x: 155,
+            y: 1,
+          },
+          {
+            x: 160,
+            y: 1,
+          },
+          {
+            x: 165,
+            y: 0,
+          },
+        ],
+        borderColor: "blue",
+        borderWidth: 2,
+        backgroundColor: "blue",
+        pointBackgroundColor: "blue",
+        pointBorderColor: "blue",
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        fill: false,
+        tension: 0,
+        showLine: true,
+      },
 
+      {
+        label: "Trung bình",
+        data: [
+          {
+            x: 160,
+            y: 0,
+          },
+          {
+            x: 165,
+            y: 1,
+          },
+          {
+            x: 173,
+            y: 1,
+          },
+          {
+            x: 175,
+            y: 0,
+          },
+        ],
+        borderColor: "green",
+        borderWidth: 2,
+        backgroundColor: "green",
+        pointBackgroundColor: "green",
+        pointBorderColor: "green",
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        fill: false,
+        tension: 0,
+        showLine: true,
+      },
+      {
+        label: "Cao",
+        data: [
+          {
+            x: 173,
+            y: 0,
+          },
+          {
+            x: 175,
+            y: 1,
+          },
+          {
+            x: 180,
+            y: 1,
+          },
+          {
+            x: 185,
+            y: 0,
+          },
+        ],
+        borderColor: "orange",
+        borderWidth: 2,
+        backgroundColor: "orange",
+        pointBackgroundColor: "orange",
+        pointBorderColor: "orange",
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        fill: false,
+        tension: 0,
+        showLine: true,
+      },
+      {
+        label: "Rất cao",
+        data: [
+          {
+            x: 180,
+            y: 0,
+          },
+          {
+            x: 185,
+            y: 1,
+          },
+          {
+            x: 190,
+            y: 1,
+          },
+        ],
+        borderColor: "purple",
+        borderWidth: 2,
+        backgroundColor: "purple",
+        pointBackgroundColor: "purple",
+        pointBorderColor: "purple",
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        fill: false,
+        tension: 0,
+        showLine: true,
+      },
+    ],
+  };
+  const options = {
+    tooltips: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Chiều cao",
+      },
+    },
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            min: 140,
+            max: 200,
+          },
+          gridLines: {
+            color: "#888",
+            drawOnChartArea: false,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            min: 0,
+            max: 1,
+          },
+          gridLines: {
+            color: "#888",
+            drawOnChartArea: false,
+          },
+        },
+      ],
+    },
+  };
+  const style = {
+    borderColor: "black",
+    borderWidth: 2,
+    backgroundColor: "black",
+    pointBackgroundColor: "black",
+    pointBorderColor: "black",
+    pointRadius: 3,
+    pointHoverRadius: 5,
+    showLine: true,
+  };
+  const [dataFinal, setDataFinal] = useState(data);
   const rightTrapezoid = (x, a, b) => {
     return (b - x) / (b - a);
   };
@@ -514,16 +475,25 @@ const Tab2 = () => {
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
       setStateResultHeight(handleLogicHeight(height));
       setStateResultWeight(handleLogicWeight(weight));
+      setStateDataUpdate(null);
+      setDataFinal(data);
     }
   }, [weight, height, heartBeat, bloodPressure]);
+  const [stateDataUpdate, setStateDataUpdate] = useState(null);
 
   useEffect(() => {
-    console.log({
-      stateResultWeight,
-      stateResultHeight,
-      stateResultBloodPressure,
-      stateResultHeartBeat,
+    let dataUpdate = [];
+    stateResultHeight.map((item) => {
+      dataUpdate.push({
+        data: [
+          { x: 145, y: item.result },
+          { x: height, y: item.result },
+          { x: height, y: 0 },
+        ],
+        ...style,
+      });
     });
+    setStateDataUpdate(dataUpdate);
   }, [
     stateResultWeight,
     stateResultHeight,
@@ -531,10 +501,19 @@ const Tab2 = () => {
     stateResultHeartBeat,
   ]);
 
+  useEffect(() => {
+    if (stateDataUpdate) {
+      setDataFinal({
+        ...dataFinal,
+        datasets: [...dataFinal.datasets, ...stateDataUpdate],
+      });
+    }
+  }, [stateDataUpdate]);
+
   //logic
   return (
     <div className="">
-      <Scatter options={options} data={data}></Scatter>
+      <Scatter options={options} data={dataFinal}></Scatter>
     </div>
   );
 };

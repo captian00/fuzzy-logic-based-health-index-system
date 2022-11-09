@@ -23,25 +23,16 @@ ChartJS.register(
 );
 
 const Tab3 = () => {
-  const { weight} = useMainContext();
+  const { weight } = useMainContext();
   const [stateResultWeight, setStateResultWeight] = useState([]);
   const data = {
     datasets: [
       {
         label: "Rất nhẹ",
         data: [
-          {
-            x: 40,
-            y: 1,
-          },
-          {
-            x: 44,
-            y: 1,
-          },
-          {
-            x: 49,
-            y: 0,
-          },
+          { x: 40, y: 1 },
+          { x: 44, y: 1 },
+          { x: 49, y: 0 },
         ],
         borderColor: "red",
         borderWidth: 2,
@@ -57,22 +48,10 @@ const Tab3 = () => {
       {
         label: "Nhẹ",
         data: [
-          {
-            x: 44,
-            y: 0,
-          },
-          {
-            x: 52,
-            y: 1,
-          },
-          {
-            x: 54,
-            y: 1,
-          },
-          {
-            x: 59,
-            y: 0,
-          },
+          { x: 44, y: 0 },
+          { x: 52, y: 1 },
+          { x: 54, y: 1 },
+          { x: 59, y: 0 },
         ],
         borderColor: "blue",
         borderWidth: 2,
@@ -89,22 +68,10 @@ const Tab3 = () => {
       {
         label: "Trung bình",
         data: [
-          {
-            x: 54,
-            y: 0,
-          },
-          {
-            x: 59,
-            y: 1,
-          },
-          {
-            x: 66,
-            y: 1,
-          },
-          {
-            x: 71,
-            y: 0,
-          },
+          { x: 54, y: 0 },
+          { x: 59, y: 1 },
+          { x: 66, y: 1 },
+          { x: 71, y: 0 },
         ],
         borderColor: "green",
         borderWidth: 2,
@@ -120,22 +87,10 @@ const Tab3 = () => {
       {
         label: "Nặng",
         data: [
-          {
-            x: 66,
-            y: 0,
-          },
-          {
-            x: 71,
-            y: 1,
-          },
-          {
-            x: 74,
-            y: 1,
-          },
-          {
-            x: 79,
-            y: 0,
-          },
+          { x: 66, y: 0 },
+          { x: 71, y: 1 },
+          { x: 74, y: 1 },
+          { x: 79, y: 0 },
         ],
         borderColor: "orange",
         borderWidth: 2,
@@ -151,18 +106,9 @@ const Tab3 = () => {
       {
         label: "Rất nặng",
         data: [
-          {
-            x: 74,
-            y: 0,
-          },
-          {
-            x: 79,
-            y: 1,
-          },
-          {
-            x: 85,
-            y: 1,
-          },
+          { x: 74, y: 0 },
+          { x: 79, y: 1 },
+          { x: 85, y: 1 },
         ],
         borderColor: "purple",
         borderWidth: 2,
@@ -308,8 +254,7 @@ const Tab3 = () => {
 
     return resultWeight;
   };
-  
-  // handleLogicHeartBeat(55);
+
   useEffect(() => {
     if (weight) {
       setStateResultWeight(handleLogicWeight(weight));
@@ -332,9 +277,7 @@ const Tab3 = () => {
       });
     });
     setStateDataUpdate(dataUpdate);
-  }, [
-    stateResultWeight,
-  ]);
+  }, [stateResultWeight]);
 
   useEffect(() => {
     if (stateDataUpdate) {

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Tabs } from "antd";
 import Tab1 from "../components/Tab1";
 import Tab2 from "../components/Tab2";
-import Tab3 from "../components/Tab3";
-import Tab4 from "../components/Tab4";
-import Tab5 from "../components/Tab5";
+
 import { Context } from "../common/context";
 
 
@@ -34,9 +32,6 @@ const Main = () => {
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hiển thị kết quả" key="2">
               <Tab2 />
-              <Tab3></Tab3>
-              <Tab4></Tab4>
-              <Tab5></Tab5>
             </Tabs.TabPane>
           </Tabs>
         </Context.Provider>

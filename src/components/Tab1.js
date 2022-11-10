@@ -13,16 +13,18 @@ const tailLayout = {
 
 const Tab1 = () => {
   const [form] = Form.useForm();
-  const { setWeight, setHeight, setHeartBeat, setBloodPressure } =
+  const { setWeight, setHeight, setHeartBeat, setBloodPressure, setSubmit } =
     useMainContext();
 
   const onFinish = (values) => {
+    setSubmit(true);
     console.log(values);
   };
 
   const onReset = () => {
     //set all value = 0
     form.resetFields();
+    setSubmit(false);
   };
 
   // const onFill = () => {
@@ -44,7 +46,10 @@ const Tab1 = () => {
       >
         <InputNumber
           min={0}
-          onChange={(val) => setHeight(val)}
+          onChange={(val) => {
+            setHeight(val);
+            setSubmit(false);
+          }}
           style={{ borderRadius: "0.25rem", width: "250px" }}
         />
       </Form.Item>
@@ -55,7 +60,10 @@ const Tab1 = () => {
       >
         <InputNumber
           min={0}
-          onChange={(val) => setWeight(val)}
+          onChange={(val) => {
+            setWeight(val);
+            setSubmit(false);
+          }}
           style={{ borderRadius: "0.25rem", width: "250px" }}
         />
       </Form.Item>
@@ -66,7 +74,10 @@ const Tab1 = () => {
       >
         <InputNumber
           min={0}
-          onChange={(val) => setHeartBeat(val)}
+          onChange={(val) => {
+            setHeartBeat(val);
+            setSubmit(false);
+          }}
           style={{ borderRadius: "0.25rem", width: "250px" }}
         />
       </Form.Item>
@@ -77,7 +88,10 @@ const Tab1 = () => {
       >
         <InputNumber
           min={0}
-          onChange={(val) => setBloodPressure(val)}
+          onChange={(val) => {
+            setBloodPressure(val);
+            setSubmit(false);
+          }}
           style={{ borderRadius: "0.25rem", width: "250px" }}
         />
       </Form.Item>

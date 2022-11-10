@@ -946,7 +946,7 @@ const dataBMI2 = {
   ],
 };
 const Tab2 = () => {
-  const { weight, height, heartBeat, bloodPressure } = useMainContext();
+  const { weight, height, heartBeat, bloodPressure, submit } = useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
   const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
   const [stateResultHeight, setStateResultHeight] = useState([]);
@@ -966,7 +966,7 @@ const Tab2 = () => {
     useState(null);
 
   useEffect(() => {
-    if (weight && height && heartBeat && bloodPressure) {
+    if (weight && height && heartBeat && bloodPressure && submit) {
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
       setStateResultHeight(handleLogicHeight(height));
@@ -1097,9 +1097,9 @@ const Tab2 = () => {
   const [dataFinalBMI, setDataFinalBMI] = useState(dataBMI);
   const [dataFinalBMI2, setDataFinalBMI2] = useState(dataBMI2);
   const [stateResultBMI, setStateResultBMI] = useState([]);
-  let BMI = useRef(10000)
+  let BMI = useRef(10000);
   console.log("BMI.current", BMI.current);
-  let BMIGraph2 = useRef()
+  let BMIGraph2 = useRef();
   // console.log("BMIGraph2.current", BMIGraph2.current);
   useEffect(() => {
     const TCPoint = handleGraphBMI(a[0].resultTC, a[0].label);
@@ -1168,11 +1168,11 @@ const Tab2 = () => {
     }
 
     const tmp = handleLogicBMI(BMI.current);
-    BMIGraph2.current = tmp
+    BMIGraph2.current = tmp;
     setStateResultBMI(tmp);
   }, [a]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     let dataBMIUpdate = [];
     stateResultBMI.map((item) => {
       dataBMIUpdate.push({
@@ -1186,7 +1186,7 @@ const Tab2 = () => {
     });
     setStateDataBMIUpdate(dataBMIUpdate);
     console.log(dataBMIUpdate);
-  },[stateResultBMI])
+  }, [stateResultBMI]);
   useEffect(() => {
     if (stateDataBMIUpdate) {
       setDataFinalBMI2({

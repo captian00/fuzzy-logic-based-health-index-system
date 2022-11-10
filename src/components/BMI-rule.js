@@ -1,6 +1,6 @@
 const BMIRule = (resultHeight, resultWeight) => {
-  console.log("height", resultHeight);
-  console.log("weight", resultWeight);
+//   console.log("height", resultHeight);
+//   console.log("weight", resultWeight);
 
   const labelHeight = resultHeight.map((item) => item.label);
   const labelAllHeight = ["RT", "T", "TB", "C", "RC"];
@@ -13,7 +13,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalHeight.push({ result: 0, label: item });
     }
   });
-  console.log("resultFinalHeight", resultFinalHeight);
+//   console.log("resultFinalHeight", resultFinalHeight);
 
   const labelWeight = resultWeight.map((item) => item.label);
   const labelAllWeight = ["RN", "N", "TB", "NA", "RNA"];
@@ -26,7 +26,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalWeight.push({ result: 0, label: item });
     }
   });
-  console.log("resultFinalWeight", resultFinalWeight);
+//   console.log("resultFinalWeight", resultFinalWeight);
 
   let resultFinal = [
     { resultTC: 2, label: "TC" },

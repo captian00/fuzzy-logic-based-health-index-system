@@ -1,6 +1,6 @@
 const BMIRule = (resultHeight, resultWeight) => {
-//   console.log("height", resultHeight);
-//   console.log("weight", resultWeight);
+  //   console.log("height", resultHeight);
+  //   console.log("weight", resultWeight);
 
   const labelHeight = resultHeight.map((item) => item.label);
   const labelAllHeight = ["RT", "T", "TB", "C", "RC"];
@@ -13,7 +13,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalHeight.push({ result: 0, label: item });
     }
   });
-//   console.log("resultFinalHeight", resultFinalHeight);
+  //   console.log("resultFinalHeight", resultFinalHeight);
 
   const labelWeight = resultWeight.map((item) => item.label);
   const labelAllWeight = ["RN", "N", "TB", "NA", "RNA"];
@@ -26,7 +26,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalWeight.push({ result: 0, label: item });
     }
   });
-//   console.log("resultFinalWeight", resultFinalWeight);
+  //   console.log("resultFinalWeight", resultFinalWeight);
 
   let resultFinal = [
     { resultTC: 2, label: "TC" },
@@ -34,6 +34,7 @@ const BMIRule = (resultHeight, resultWeight) => {
     { resultTBP: 2, label: "TBP" },
     { resultBP: 2, label: "BP" },
   ];
+
   function rule(x, labelHeight, labelWeight) {
     // console.log("Luat:" + labelHeight + " " + labelWeight);
     const labelResult = x;
@@ -60,6 +61,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       }
     });
   }
+
   labelAllHeight.forEach((labelHeight) => {
     labelAllWeight.forEach((labelWeight) => {
       // height = RT
@@ -184,6 +186,7 @@ const BMIRule = (resultHeight, resultWeight) => {
       }
     });
   });
+
   resultFinal = resultFinal.map((item) => {
     if (item.resultTC === 2) {
       return { ...item, resultTC: 0 };
@@ -202,4 +205,4 @@ const BMIRule = (resultHeight, resultWeight) => {
   // console.log(resultFinal);
   return resultFinal;
 };
-export default BMIRule
+export default BMIRule;

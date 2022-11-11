@@ -12,7 +12,7 @@ const Main = () => {
   const [bloodPressure, setBloodPressure] = useState(0);
   const [submit, setSubmit] = useState(false);
   return (
-    <div className="mx-auto max-w-lg border-dashed border-2 border-indigo-600 h-full bg-slate-200">
+    <div className="mx-auto max-w-6xl border-dashed border-2 border-indigo-600 h-full bg-slate-200">
       <div className="items-center justyfind-center">
         <Context.Provider
           value={{

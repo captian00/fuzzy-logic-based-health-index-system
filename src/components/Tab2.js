@@ -132,14 +132,25 @@ const handleLogicBMI = (BMI) => {
   if (BMI <= 17) {
     resultBMI.push({ result: 1, label: "TC" });
   }
-  if (17 < BMI && BMI < 18.5) {
+  if (17 < BMI && BMI < 18) {
     resultBMI.push({
       result: rightTrapezoid(BMI, 17, 18.5),
       label: "TC",
     });
   }
 
-  if (18 < BMI && BMI < 19) {
+  if (18 <= BMI && BMI <= 18.5) {
+    resultBMI.push({
+      result: rightTrapezoid(BMI, 17, 18.5),
+      label: "TC",
+    });
+    resultBMI.push({
+      result: leftTrapezoid(BMI, 18, 19),
+      label: "CD",
+    });
+  }
+
+  if (18.5 < BMI && BMI < 19) {
     resultBMI.push({
       result: leftTrapezoid(BMI, 18, 19),
       label: "CD",
@@ -151,14 +162,25 @@ const handleLogicBMI = (BMI) => {
       label: "CD",
     });
   }
-  if (22 < BMI && BMI < 24.9) {
+  if (22 < BMI && BMI < 24) {
     resultBMI.push({
       result: rightTrapezoid(BMI, 22, 24.9),
       label: "CD",
     });
   }
 
-  if (24 < BMI && BMI < 26) {
+  if (24 <= BMI && BMI <= 24.9) {
+    resultBMI.push({
+      result: rightTrapezoid(BMI, 22, 24.9),
+      label: "CD",
+    });
+    resultBMI.push({
+      result: leftTrapezoid(BMI, 24, 26),
+      label: "TBP",
+    });
+  }
+
+  if (24.9 < BMI && BMI < 26) {
     resultBMI.push({
       result: leftTrapezoid(BMI, 24, 26),
       label: "TBP",
@@ -175,9 +197,13 @@ const handleLogicBMI = (BMI) => {
       result: rightTrapezoid(BMI, 28, 29.9),
       label: "TBP",
     });
+    resultBMI.push({
+      result: leftTrapezoid(BMI, 28, 30),
+      label: "BP",
+    });
   }
 
-  if (28 < BMI && BMI < 30) {
+  if (29.9 < BMI && BMI < 30) {
     resultBMI.push({
       result: leftTrapezoid(BMI, 28, 30),
       label: "BP",
@@ -387,7 +413,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: 18.5, y: 0 },
         { x: 16, y: 0 },
-        { x: 0, y },
       ];
     }
     if (y === 1) {
@@ -398,7 +423,6 @@ const handleGraphBMI = (y, label) => {
         { x: x2, y },
         { x: 18.5, y: 0 },
         { x: 16, y: 0 },
-        { x: x1, y },
       ];
     }
   }
@@ -411,7 +435,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 24.9, y: 0 },
-        { x: 18, y: 0 },
       ];
     }
     if (y === 1) {
@@ -422,7 +445,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 24.9, y: 0 },
-        { x: 18, y: 0 },
       ];
     }
   }
@@ -435,7 +457,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 29.9, y: 0 },
-        { x: 24, y: 0 },
       ];
     }
     if (y === 1) {
@@ -446,7 +467,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 29.9, y: 0 },
-        { x: 24, y: 0 },
       ];
     }
   }
@@ -458,7 +478,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: 32, y },
         { x: 32, y: 0 },
-        { x: 28, y: 0 },
       ];
     }
     if (y === 1) {
@@ -469,7 +488,6 @@ const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 32, y: 0 },
-        { x: 28, y: 0 },
       ];
     }
   }
@@ -982,7 +1000,7 @@ const Tab2 = () => {
       setStateDataHeartBeatUpdate(null);
       setStateDataBloodPressureUpdate(null);
     }
-  }, [weight, height, heartBeat, bloodPressure]);
+  }, [weight, height, heartBeat, bloodPressure,submit]);
 
   useEffect(() => {
     let dataHeightUpdate = [];
@@ -1097,23 +1115,37 @@ const Tab2 = () => {
   const [dataFinalBMI, setDataFinalBMI] = useState(dataBMI);
   const [dataFinalBMI2, setDataFinalBMI2] = useState(dataBMI2);
   const [stateResultBMI, setStateResultBMI] = useState([]);
-  let BMI = useRef(10000);
-  console.log("BMI.current", BMI.current);
+  // let BMI = useRef(10000);
+  // console.log("BMI.current", BMI.current);
   let BMIGraph2 = useRef();
+  let newPointList = useRef([]);
+  let minX = 10000;
+  let maxY = -10000;
+  newPointList.current.forEach((item) => {
+    if (item.y > 0) {
+      if (item.y > maxY) {
+        maxY = item.y;
+      }
+    }
+  });
+  newPointList.current.forEach((item) => {
+    if (item.y === maxY) {
+      if (item.x < minX) {
+        minX = item.x;
+      }
+    }
+  });
+
+
   // console.log("BMIGraph2.current", BMIGraph2.current);
   useEffect(() => {
+
     const TCPoint = handleGraphBMI(a[0].resultTC, a[0].label);
     const CDPoint = handleGraphBMI(a[1].resultCD, a[1].label);
     const TBPPoint = handleGraphBMI(a[2].resultTBP, a[2].label);
     const BPPoint = handleGraphBMI(a[3].resultBP, a[3].label);
     if (TCPoint !== undefined) {
-      TCPoint.forEach((item) => {
-        if (item.y > 0) {
-          if (item.x < BMI.current) {
-            BMI.current = item.x;
-          }
-        }
-      });
+      newPointList.current = [...newPointList.current, ...TCPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...TCPoint],
@@ -1122,13 +1154,7 @@ const Tab2 = () => {
       setStateDataUpdate_TC(dataUpdate);
     }
     if (CDPoint !== undefined) {
-      CDPoint.forEach((item) => {
-        if (item.y > 0) {
-          if (item.x < BMI.current) {
-            BMI.current = item.x;
-          }
-        }
-      });
+      newPointList.current = [...newPointList.current, ...CDPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...CDPoint],
@@ -1137,13 +1163,7 @@ const Tab2 = () => {
       setStateDataUpdate_CD(dataUpdate);
     }
     if (TBPPoint !== undefined) {
-      TBPPoint.forEach((item) => {
-        if (item.y > 0) {
-          if (item.x < BMI.current) {
-            BMI.current = item.x;
-          }
-        }
-      });
+      newPointList.current = [...newPointList.current, ...TBPPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...TBPPoint],
@@ -1152,13 +1172,7 @@ const Tab2 = () => {
       setStateDataUpdate_TBP(dataUpdate);
     }
     if (BPPoint !== undefined) {
-      BPPoint.forEach((item) => {
-        if (item.y > 0) {
-          if (item.x < BMI.current) {
-            BMI.current = item.x;
-          }
-        }
-      });
+      newPointList.current = [...newPointList.current, ...BPPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...BPPoint],
@@ -1167,26 +1181,27 @@ const Tab2 = () => {
       setStateDataUpdate_BP(dataUpdate);
     }
 
-    const tmp = handleLogicBMI(BMI.current);
+    
+  }, [a]);
+  useEffect(()=>{
+    const tmp = handleLogicBMI(minX);
     BMIGraph2.current = tmp;
     setStateResultBMI(tmp);
-  }, [a]);
-
+  },[minX])
   useEffect(() => {
     let dataBMIUpdate = [];
     stateResultBMI.map((item) => {
       dataBMIUpdate.push({
         data: [
           { x: 16, y: item.result },
-          { x: BMI.current, y: item.result },
-          { x: BMI.current, y: 0 },
+          { x: minX, y: item.result },
+          { x: minX, y: 0 },
         ],
         ...style,
       });
     });
     setStateDataBMIUpdate(dataBMIUpdate);
-    console.log(dataBMIUpdate);
-  }, [stateResultBMI]);
+  }, [stateResultBMI,minX]);
   useEffect(() => {
     if (stateDataBMIUpdate) {
       setDataFinalBMI2({

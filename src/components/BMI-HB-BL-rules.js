@@ -35,10 +35,10 @@ const BMI_HB_BL_rule = (resultBMI, resultHeartBeat, resultBloodPressure)=>{
         resultFinalBloodPressure.push({ result: 0, label: item });
       }
     });
-    console.log('--------------------------');
-    console.log("resultFinalBMI", resultFinalBMI);
-    console.log("resultFinalHeartBeat", resultFinalHeartBeat);
-    console.log("resultFinalBloodPressure", resultFinalBloodPressure);
-    console.log("--------------------------");
+    // console.log('--------------------------');
+    // console.log("resultFinalBMI", resultFinalBMI);
+    // console.log("resultFinalHeartBeat", resultFinalHeartBeat);
+    // console.log("resultFinalBloodPressure", resultFinalBloodPressure);
+    // console.log("--------------------------");
 }
 export default BMI_HB_BL_rule

@@ -34,6 +34,10 @@ import HI1 from "../image/HIrule/HI1.png";
 import HI2 from "../image/HIrule/HI2.png";
 import HI3 from "../image/HIrule/HI3.png";
 import HI4 from "../image/HIrule/HI4.png";
+import Hi1 from "../image/HI/HI1.png";
+import Hi2 from "../image/HI/HI2.png";
+import Hi3 from "../image/HI/HI3.png";
+import Hi4 from "../image/HI/HI4.png";
 
 import { Button, Modal } from "antd-mobile";
 import { Scatter } from "react-chartjs-2";
@@ -769,10 +773,13 @@ const Tab2 = () => {
                   <div>
                     <img src={HI1}></img>
                     <br></br>
+
                     <img src={HI2}></img>
                     <br></br>
+
                     <img src={HI3}></img>
                     <br></br>
+
                     <img src={HI4}></img>
                   </div>
                 ),
@@ -802,13 +809,17 @@ const Tab2 = () => {
                 content: (
                   //thay cho nay
                   <div>
-                    <img src={HI1}></img>
+                    <p>Yếu</p>
+                    <img src={Hi1}></img>
                     <br></br>
-                    <img src={HI2}></img>
+                    <p>Không khỏe lắm</p>
+                    <img src={Hi2}></img>
                     <br></br>
-                    <img src={HI3}></img>
+                    <p>Có vẻ khỏe</p>
+                    <img src={Hi3}></img>
                     <br></br>
-                    <img src={HI4}></img>
+                    <p>Khỏe</p>
+                    <img src={Hi4}></img>
                   </div>
                 ),
                 onConfirm: () => {

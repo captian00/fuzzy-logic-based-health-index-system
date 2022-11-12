@@ -25,6 +25,10 @@ const Tab1 = () => {
     //set all value = 0
     form.resetFields();
     setSubmit(false);
+    setWeight(0)
+    setHeight(0)
+    setHeartBeat(0);
+    setBloodPressure(0)
   };
 
   // const onFill = () => {

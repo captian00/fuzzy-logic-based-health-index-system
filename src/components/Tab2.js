@@ -133,6 +133,8 @@ const style2 = {
   showLine: true,
 };
 const Tab2 = () => {
+
+  
   // Đưa dữ liệu chiều cao, cân nặng, nhịp tim, huyết áp lên đồ thị
   const { weight, height, heartBeat, bloodPressure, submit } = useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
@@ -153,6 +155,7 @@ const Tab2 = () => {
   const [stateDataBloodPressureUpdate, setStateDataBloodPressureUpdate] =
     useState(null);
   useEffect(() => {
+    
     if (weight && height && heartBeat && bloodPressure && submit) {
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
@@ -169,6 +172,16 @@ const Tab2 = () => {
       setStateDataHeartBeatUpdate(null);
       setStateDataBloodPressureUpdate(null);
       setDataFinalBMI2(dataBMI2);
+    }
+    if(!weight && !height && !heartBeat && !bloodPressure){
+      setDataFinalHeight(dataHeight)
+      setDataFinalWeight(dataWeight);
+      setDataFinalHeartBeat(dataHeartBeat)
+      setDataFinalBloodPressure(dataBloodPressure)
+      setDataFinalBMI(dataBMI)
+      setDataFinalBMI2(dataBMI2)
+      setDataFinalHI(dataHI)
+      setDataFinalHI2(dataHI2)
     }
   }, [weight, height, heartBeat, bloodPressure, submit]);
 

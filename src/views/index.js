@@ -11,6 +11,7 @@ const Main = () => {
   const [heartBeat, setHeartBeat] = useState(0);
   const [bloodPressure, setBloodPressure] = useState(0);
   const [submit, setSubmit] = useState(false);
+  const [kq, setKQ] = useState();
   return (
     <div className="mx-auto max-w-6xl border-dashed border-2 border-indigo-600 h-full bg-slate-200">
       <div className="items-center justyfind-center">
@@ -21,11 +22,13 @@ const Main = () => {
             heartBeat,
             bloodPressure,
             submit,
+            kq,
             setWeight,
             setHeight,
             setHeartBeat,
             setBloodPressure,
             setSubmit,
+            setKQ,
           }}
         >
           <Tabs defaultActiveKey="1">

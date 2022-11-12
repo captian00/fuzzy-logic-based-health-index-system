@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, InputNumber, PageHeader } from "antd";
 import { useMainContext } from "../common/context";
 
@@ -13,22 +13,71 @@ const tailLayout = {
 
 const Tab1 = () => {
   const [form] = Form.useForm();
-  const { setWeight, setHeight, setHeartBeat, setBloodPressure, setSubmit } =
-    useMainContext();
+  const {
+    setWeight,
+    setHeight,
+    setHeartBeat,
+    setBloodPressure,
+    setSubmit,
+    kq,
+  } = useMainContext();
+  const [detail, setDetail] = useState([]);
 
+  const left = (x, a, b) => {
+    return (x - a) / (b - a);
+  };
+
+  const right = (x, c, d) => {
+    return (d - x) / (d - c);
+  };
+
+  const showDetail = (kq) => {
+    let arr = [];
+    // if (kq <= 1) {
+    //   arr = [...arr, { label: "Y", result: 0 }];
+    // }
+    if (kq < 25 && kq > 1) {
+      arr = [...arr, { label: "Y", result: left(kq, 1, 25) }];
+    }
+    if (kq < 45 && kq > 25) {
+      arr = [...arr, { label: "Y", result: right(kq, 25, 45) }];
+    }
+
+    if (kq < 50 && kq > 35) {
+      arr = [...arr, { label: "KKL", result: left(kq, 35, 50) }];
+    }
+    if (kq < 70 && kq > 50) {
+      arr = [...arr, { label: "KKL", result: right(kq, 50, 70) }];
+    }
+
+    if (kq < 75 && kq > 55) {
+      arr = [...arr, { label: "CVK", result: left(kq, 55, 75) }];
+    }
+    if (kq < 85 && kq > 75) {
+      arr = [...arr, { label: "CVK", result: right(kq, 75, 85) }];
+    }
+
+    if (kq < 90 && kq > 80) {
+      arr = [...arr, { label: "K", result: left(kq, 80, 90) }];
+    }
+    if (kq < 100 && kq > 90) {
+      arr = [...arr, { label: "K", result: right(kq, 90, 100) }];
+    }
+    // setDetail(arr);
+    return arr;
+  };
   const onFinish = (values) => {
     setSubmit(true);
-    console.log(values);
   };
 
   const onReset = () => {
     //set all value = 0
     form.resetFields();
     setSubmit(false);
-    setWeight(0)
-    setHeight(0)
+    setWeight(0);
+    setHeight(0);
     setHeartBeat(0);
-    setBloodPressure(0)
+    setBloodPressure(0);
   };
 
   // const onFill = () => {
@@ -37,85 +86,98 @@ const Tab1 = () => {
   //     gender: "male",
   //   });
   // };
-
+  useEffect(() => {
+    setDetail(showDetail(kq));
+  }, [kq]);
+  console.log("detail: ", detail);
   return (
-    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-      <PageHeader style={{ fontSize: "20px", paddingTop: "1px" }}>
-        Mời bạn nhập các thông tin
-      </PageHeader>
-      <Form.Item
-        name="height"
-        label="Chiều cao (cm)"
-        rules={[{ required: true }]}
-      >
-        <InputNumber
-          min={0}
-          onChange={(val) => {
-            setHeight(val);
-            setSubmit(false);
-          }}
-          style={{ borderRadius: "0.25rem", width: "250px" }}
-        />
-      </Form.Item>
-      <Form.Item
-        name="weight"
-        label="Cân nặng (kg)"
-        rules={[{ required: true }]}
-      >
-        <InputNumber
-          min={0}
-          onChange={(val) => {
-            setWeight(val);
-            setSubmit(false);
-          }}
-          style={{ borderRadius: "0.25rem", width: "250px" }}
-        />
-      </Form.Item>
-      <Form.Item
-        name="heartbeat"
-        label="Nhịp tim (lần/phút)"
-        rules={[{ required: true }]}
-      >
-        <InputNumber
-          min={0}
-          onChange={(val) => {
-            setHeartBeat(val);
-            setSubmit(false);
-          }}
-          style={{ borderRadius: "0.25rem", width: "250px" }}
-        />
-      </Form.Item>
-      <Form.Item
-        name="bloodPressure"
-        label="Huyết áp (mmHg)"
-        rules={[{ required: true }]}
-      >
-        <InputNumber
-          min={0}
-          onChange={(val) => {
-            setBloodPressure(val);
-            setSubmit(false);
-          }}
-          style={{ borderRadius: "0.25rem", width: "250px" }}
-        />
-      </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ borderRadius: "0.25rem" }}
+    <>
+      <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+        <PageHeader style={{ fontSize: "20px", paddingTop: "1px" }}>
+          Mời bạn nhập các thông tin
+        </PageHeader>
+        <Form.Item
+          name="height"
+          label="Chiều cao (cm)"
+          rules={[{ required: true }]}
         >
-          Tính chỉ số sức khỏe
-        </Button>
-        <Button
-          htmlType="button"
-          onClick={onReset}
-          style={{ background: "red", color: "white", borderRadius: "0.25rem" }}
+          <InputNumber
+            min={0}
+            onChange={(val) => {
+              setHeight(val);
+              setSubmit(false);
+            }}
+            style={{ borderRadius: "0.25rem", width: "250px" }}
+          />
+        </Form.Item>
+        <Form.Item
+          name="weight"
+          label="Cân nặng (kg)"
+          rules={[{ required: true }]}
         >
-          Xóa toàn bộ thông tin
-        </Button>
-      </Form.Item>
-    </Form>
+          <InputNumber
+            min={0}
+            onChange={(val) => {
+              setWeight(val);
+              setSubmit(false);
+            }}
+            style={{ borderRadius: "0.25rem", width: "250px" }}
+          />
+        </Form.Item>
+        <Form.Item
+          name="heartbeat"
+          label="Nhịp tim (lần/phút)"
+          rules={[{ required: true }]}
+        >
+          <InputNumber
+            min={0}
+            onChange={(val) => {
+              setHeartBeat(val);
+              setSubmit(false);
+            }}
+            style={{ borderRadius: "0.25rem", width: "250px" }}
+          />
+        </Form.Item>
+        <Form.Item
+          name="bloodPressure"
+          label="Huyết áp (mmHg)"
+          rules={[{ required: true }]}
+        >
+          <InputNumber
+            min={0}
+            onChange={(val) => {
+              setBloodPressure(val);
+              setSubmit(false);
+            }}
+            style={{ borderRadius: "0.25rem", width: "250px" }}
+          />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ borderRadius: "0.25rem" }}
+          >
+            Tính chỉ số sức khỏe
+          </Button>
+          <Button
+            htmlType="button"
+            onClick={onReset}
+            style={{
+              background: "red",
+              color: "white",
+              borderRadius: "0.25rem",
+            }}
+          >
+            Xóa toàn bộ thông tin
+          </Button>
+        </Form.Item>
+      </Form>
+      <p>{`Chỉ số sức khỏe: ${kq}`}</p>
+      {detail.map((item) => (
+        <p>{`${item.label}: ${item.result}`}</p>
+      ))}
+    </>
   );
 };
 

@@ -351,10 +351,10 @@ export const handleLogicHI = (HI) => {
     });
   }
   if (45 < HI && HI < 50) {
-     resultHI.push({
-       result: leftTrapezoid(HI, 35, 50),
-       label: "LH",
-     });
+    resultHI.push({
+      result: leftTrapezoid(HI, 35, 50),
+      label: "LH",
+    });
   }
   if (HI === 50) {
     resultHI.push({ result: 1, label: "LH" });
@@ -594,5 +594,6 @@ export const handleGraphHI = (y, label) => {
       ];
     }
   }
+  return [];
 };
 //-----------------------------------------

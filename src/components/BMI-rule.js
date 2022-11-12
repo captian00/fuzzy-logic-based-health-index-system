@@ -1,8 +1,5 @@
 //Xử lý luật cho BMI
 const BMIRule = (resultHeight, resultWeight) => {
-  //   console.log("height", resultHeight);
-  //   console.log("weight", resultWeight);
-
   const labelHeight = resultHeight.map((item) => item.label);
   const labelAllHeight = ["RT", "T", "TB", "C", "RC"];
   const resultFinalHeight = [];
@@ -14,7 +11,6 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalHeight.push({ result: 0, label: item });
     }
   });
-  //   console.log("resultFinalHeight", resultFinalHeight);
 
   const labelWeight = resultWeight.map((item) => item.label);
   const labelAllWeight = ["RN", "N", "TB", "NA", "RNA"];
@@ -27,7 +23,6 @@ const BMIRule = (resultHeight, resultWeight) => {
       resultFinalWeight.push({ result: 0, label: item });
     }
   });
-  //   console.log("resultFinalWeight", resultFinalWeight);
 
   let resultFinal = [
     { resultTC: 2, label: "TC" },
@@ -37,7 +32,6 @@ const BMIRule = (resultHeight, resultWeight) => {
   ];
 
   function rule(x, labelHeight, labelWeight) {
-    // console.log("Luat:" + labelHeight + " " + labelWeight);
     const labelResult = x;
     const tmp = "result" + x;
     const heightItem = resultFinalHeight.filter(
@@ -48,17 +42,10 @@ const BMIRule = (resultHeight, resultWeight) => {
     );
     const num1 = heightItem[0].result;
     const num2 = weightItem[0].result;
-    // console.log("num1:", num1);
-    // console.log("num2:", num2);
     const min = Math.min(num1, num2);
-    // console.log("min:", min);
     resultFinal.forEach((item) => {
-      //   console.log("truoc if item.result:", item?.[tmp], tmp);
       if (item.label === labelResult && item?.[tmp] > min && min !== 0) {
-        // console.log("min:", min);
         item[tmp] = min;
-        // console.log("cap nhat item.result:", item[tmp], tmp);
-        // console.log("----------");
       }
     });
   }
@@ -203,7 +190,6 @@ const BMIRule = (resultHeight, resultWeight) => {
     }
     return item;
   });
-  // console.log(resultFinal);
   return resultFinal;
 };
 export default BMIRule;

@@ -25,11 +25,11 @@ import BMI2 from "../image/BMI/BMI2.png";
 import BMI3 from "../image/BMI/BMI3.png";
 import BMI4 from "../image/BMI/BMI4.png";
 import nhiptimThap from "../image/NhipTim/thap.png";
-import nhiptimBT from "../image/NhipTim/binhthuong.png"
-import nhiptimCao from "../image/NhipTim/cao.png"
+import nhiptimBT from "../image/NhipTim/binhthuong.png";
+import nhiptimCao from "../image/NhipTim/cao.png";
 import huyetapThap from "../image/HuyetAp/thap.png";
-import huyeapBT from "../image/HuyetAp/binhthuong.png"
-import huyetapCao from "../image/HuyetAp/cao.png"
+import huyeapBT from "../image/HuyetAp/binhthuong.png";
+import huyetapCao from "../image/HuyetAp/cao.png";
 import HI1 from "../image/HIrule/HI1.png";
 import HI2 from "../image/HIrule/HI2.png";
 import HI3 from "../image/HIrule/HI3.png";
@@ -143,10 +143,9 @@ const style2 = {
   showLine: true,
 };
 const Tab2 = () => {
-
-  
   // Đưa dữ liệu chiều cao, cân nặng, nhịp tim, huyết áp lên đồ thị
-  const { weight, height, heartBeat, bloodPressure, submit } = useMainContext();
+  const { weight, height, heartBeat, bloodPressure, submit, setKQ } =
+    useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
   const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
   const [stateResultHeight, setStateResultHeight] = useState([]);
@@ -165,7 +164,6 @@ const Tab2 = () => {
   const [stateDataBloodPressureUpdate, setStateDataBloodPressureUpdate] =
     useState(null);
   useEffect(() => {
-    
     if (weight && height && heartBeat && bloodPressure && submit) {
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
@@ -183,15 +181,15 @@ const Tab2 = () => {
       setStateDataBloodPressureUpdate(null);
       setDataFinalBMI2(dataBMI2);
     }
-    if(!weight && !height && !heartBeat && !bloodPressure){
-      setDataFinalHeight(dataHeight)
+    if (!weight && !height && !heartBeat && !bloodPressure) {
+      setDataFinalHeight(dataHeight);
       setDataFinalWeight(dataWeight);
-      setDataFinalHeartBeat(dataHeartBeat)
-      setDataFinalBloodPressure(dataBloodPressure)
-      setDataFinalBMI(dataBMI)
-      setDataFinalBMI2(dataBMI2)
-      setDataFinalHI(dataHI)
-      setDataFinalHI2(dataHI2)
+      setDataFinalHeartBeat(dataHeartBeat);
+      setDataFinalBloodPressure(dataBloodPressure);
+      setDataFinalBMI(dataBMI);
+      setDataFinalBMI2(dataBMI2);
+      setDataFinalHI(dataHI);
+      setDataFinalHI2(dataHI2);
     }
   }, [weight, height, heartBeat, bloodPressure, submit]);
 
@@ -467,26 +465,15 @@ const Tab2 = () => {
   const [resultHI, setResultHI] = useState(undefined);
 
   useEffect(() => {
-    console.log("healthIndex", healthIndex);
     setUHPoint(handleGraphHI(healthIndex[0].resultUH, healthIndex[0].label));
     setLHPoint(handleGraphHI(healthIndex[1].resultLH, healthIndex[1].label));
     setSHPoint(handleGraphHI(healthIndex[2].resultSH, healthIndex[2].label));
     setHPoint(handleGraphHI(healthIndex[3].resultH, healthIndex[3].label));
   }, [healthIndex]);
   useEffect(() => {
-    console.log("UHPoint", UHPoint);
-    console.log("LHPoint", LHPoint);
-    console.log("SHPoint", SHPoint);
-    console.log("HPoint", HPoint);
-    if (
-      UHPoint !== undefined &&
-      LHPoint !== undefined &&
-      SHPoint !== undefined &&
-      HPoint !== undefined
-    ) {
-      setNewHIPoint([...UHPoint, ...LHPoint, ...SHPoint, ...HPoint]);
-    }
-  }, [HPoint]);
+    setNewHIPoint([...UHPoint, ...LHPoint, ...SHPoint, ...HPoint]);
+  }, [HPoint, UHPoint, SHPoint, LHPoint]);
+
   const [minXHi, setMinXHi] = useState(10000);
   const [maxYHi, setMaxYHi] = useState(-10000);
   useEffect(() => {
@@ -508,19 +495,21 @@ const Tab2 = () => {
     });
   }, [minXHi, maxYHi]);
   useEffect(() => {
-    console.log("minXHi", minXHi);
-    console.log("maxYHi", maxYHi);
-    console.log("newHIPoint", newHIPoint);
     let dataHIUpdate = [];
     dataHIUpdate.push({
       data: [...newHIPoint],
       ...style,
     });
+    console.log("dataHIUpdate: ", dataHIUpdate);
     setStateDataHIUpdate(dataHIUpdate);
     setResultHI(handleLogicHI(minXHi));
-  }, [minXHi]);
+  }, [minXHi, newHIPoint]);
+
   useEffect(() => {
     if (stateDataHIUpdate) {
+      console.log("@@@stateDataHIUpdate: ", stateDataHIUpdate);
+      console.log("@@@dataFinalHI: ", dataFinalHI);
+      console.log("@@@222: ", [...dataFinalHI.datasets, ...stateDataHIUpdate]);
       setDataFinalHI(() => {
         return {
           ...dataFinalHI,
@@ -536,7 +525,6 @@ const Tab2 = () => {
       resultHI.length === 1 &&
       resultHI[0].result === maxYHi
     ) {
-      console.log("resultHI", resultHI);
       resultHI.map((item) => {
         dataHIUpdate.push({
           data: [
@@ -551,7 +539,6 @@ const Tab2 = () => {
     }
   }, [resultHI]);
   useEffect(() => {
-    console.log("stateDataHIUpdate2", stateDataHIUpdate2);
     if (stateDataHIUpdate2) {
       setDataFinalHI2({
         ...dataFinalHI2,
@@ -559,6 +546,8 @@ const Tab2 = () => {
       });
     }
   }, [stateDataHIUpdate2]);
+  setKQ(minXHi);
+
   //----------------------------------------------------------
   return (
     <>
@@ -585,9 +574,7 @@ const Tab2 = () => {
                     <img src={chieucao5}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -617,9 +604,7 @@ const Tab2 = () => {
                     <img src={cannang5}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -646,9 +631,7 @@ const Tab2 = () => {
                     <img src={bmiRule}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -682,9 +665,7 @@ const Tab2 = () => {
                     <img src={BMI4}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -715,9 +696,7 @@ const Tab2 = () => {
                     <img src={nhiptimCao}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -745,9 +724,7 @@ const Tab2 = () => {
                     <img src={huyetapCao}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -783,9 +760,7 @@ const Tab2 = () => {
                     <img src={HI4}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }
@@ -822,9 +797,7 @@ const Tab2 = () => {
                     <img src={Hi4}></img>
                   </div>
                 ),
-                onConfirm: () => {
-                  console.log("Confirmed");
-                },
+                onConfirm: () => {},
                 confirmText: "OK",
               })
             }

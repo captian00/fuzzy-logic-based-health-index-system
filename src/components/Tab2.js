@@ -24,6 +24,12 @@ import BMI1 from "../image/BMI/BMI1.png";
 import BMI2 from "../image/BMI/BMI2.png";
 import BMI3 from "../image/BMI/BMI3.png";
 import BMI4 from "../image/BMI/BMI4.png";
+import nhiptimThap from "../image/NhipTim/thap.png";
+import nhiptimBT from "../image/NhipTim/binhthuong.png"
+import nhiptimCao from "../image/NhipTim/cao.png"
+import huyetapThap from "../image/HuyetAp/thap.png";
+import huyeapBT from "../image/HuyetAp/binhthuong.png"
+import huyetapCao from "../image/HuyetAp/cao.png"
 import HI1 from "../image/HIrule/HI1.png";
 import HI2 from "../image/HIrule/HI2.png";
 import HI3 from "../image/HIrule/HI3.png";
@@ -688,10 +694,62 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Nhịp tim</p>
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <p>Thấp</p>
+                    <img src={nhiptimThap}></img>
+                    <br></br>
+                    <p>Bình thường</p>
+                    <img src={nhiptimBT}></img>
+                    <br></br>
+                    <p>Cao</p>
+                    <img src={nhiptimCao}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Hàm thành viên
+          </Button>
         </div>
         <div className="max-w-xs m-auto">
           <p>Huyết áp</p>
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <p>Thấp</p>
+                    <img src={huyetapThap}></img>
+                    <br></br>
+                    <p>Bình thường</p>
+                    <img src={huyeapBT}></img>
+                    <br></br>
+                    <p>Cao</p>
+                    <img src={huyetapCao}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Hàm thành viên
+          </Button>
         </div>
       </div>
       <div className=" w-full">

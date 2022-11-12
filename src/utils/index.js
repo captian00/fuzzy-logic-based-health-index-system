@@ -1,10 +1,13 @@
+//Xử lý các hàm thành viên
 export const rightTrapezoid = (x, a, b) => {
   return (b - x) / (b - a);
 };
 export const leftTrapezoid = (x, c, d) => {
   return (x - c) / (d - c);
 };
+//------------------------------------
 
+//xử lý các tập mờ
 export const handleLogicBloodPressure = (bloodPressure) => {
   let resultBloodPressure = [];
   if (bloodPressure <= 80) {
@@ -414,9 +417,9 @@ export const handleLogicHI = (HI) => {
   }
   return resultHI;
 };
+//-----------------------------------------
 
-
-
+//Các hàm xử lý sau khi giải mờ
 export const handleGraphBMI = (y, label) => {
   let x1;
   let x2;
@@ -592,3 +595,4 @@ export const handleGraphHI = (y, label) => {
     }
   }
 };
+//-----------------------------------------

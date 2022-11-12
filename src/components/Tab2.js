@@ -133,6 +133,7 @@ const style2 = {
   showLine: true,
 };
 const Tab2 = () => {
+  // Đưa dữ liệu chiều cao, cân nặng, nhịp tim, huyết áp lên đồ thị
   const { weight, height, heartBeat, bloodPressure, submit } = useMainContext();
   const [stateResultHeartBeat, setStateResultHeartBeat] = useState([]);
   const [stateResultBloodPressure, setStateResultBloodPressure] = useState([]);
@@ -151,8 +152,6 @@ const Tab2 = () => {
     useState(null);
   const [stateDataBloodPressureUpdate, setStateDataBloodPressureUpdate] =
     useState(null);
-
-  // Đưa dữ liệu chiều cao, cân nặng, nhịp tim, huyết áp lên đồ thị
   useEffect(() => {
     if (weight && height && heartBeat && bloodPressure && submit) {
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
@@ -268,8 +267,6 @@ const Tab2 = () => {
   ]);
   //----------------------------------------------------------
 
-
-  
   // Sử dụng hệ mờ với 2 chỉ số chiều cao, cân nặng để tính chỉ số BMI và in kết quả lên đồ thị
   const [a, setA] = useState([
     { resultTC: 2, label: "TC" },
@@ -417,9 +414,6 @@ const Tab2 = () => {
     stateDataUpdate_BP,
   ]);
   //----------------------------------------------------------
-
-
-
 
   // Sử dụng hệ mờ với 3 chỉ số BMI, nhịp tim và huyết áp để tính chỉ số HI và in kết quả lên đồ thị
   const [healthIndex, setHealthIndex] = useState([

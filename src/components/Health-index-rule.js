@@ -1,3 +1,4 @@
+//Xử lý luật cho Health Index
 const BMI_HB_BL_rule = (resultBMI, resultHeartBeat, resultBloodPressure) => {
   const labelBMI = resultBMI.map((item) => item.label);
   const labelAllBMI = ["TC", "CD", "TBP", "BP"];

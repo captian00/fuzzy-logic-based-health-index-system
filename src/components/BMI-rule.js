@@ -1,3 +1,4 @@
+//Xử lý luật cho BMI
 const BMIRule = (resultHeight, resultWeight) => {
   //   console.log("height", resultHeight);
   //   console.log("weight", resultWeight);

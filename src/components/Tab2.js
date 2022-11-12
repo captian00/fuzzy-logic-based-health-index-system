@@ -9,7 +9,26 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import abc from "../image/HuyetAp.png";
+import chieucao1 from "../image/Chieucao/chieucao1.png";
+import chieucao2 from "../image/Chieucao/chieucao2.png";
+import chieucao3 from "../image/Chieucao/chieucao3.png";
+import chieucao4 from "../image/Chieucao/chieucao4.png";
+import chieucao5 from "../image/Chieucao/chieucao5.png";
+import bmiRule from "../image/BMIrule.png";
+import cannang1 from "../image/Cannang/cannang1.png";
+import cannang2 from "../image/Cannang/cannang2.png";
+import cannang3 from "../image/Cannang/cannang3.png";
+import cannang4 from "../image/Cannang/cannang4.png";
+import cannang5 from "../image/Cannang/cannang5.png";
+import BMI1 from "../image/BMI/BMI1.png";
+import BMI2 from "../image/BMI/BMI2.png";
+import BMI3 from "../image/BMI/BMI3.png";
+import BMI4 from "../image/BMI/BMI4.png";
+import HI1 from "../image/HIrule/HI1.png";
+import HI2 from "../image/HIrule/HI2.png";
+import HI3 from "../image/HIrule/HI3.png";
+import HI4 from "../image/HIrule/HI4.png";
+
 import { Button, Modal } from "antd-mobile";
 import { Scatter } from "react-chartjs-2";
 import { useMainContext } from "../common/context";
@@ -22,14 +41,18 @@ import {
   dataBloodPressure,
   dataBMI,
   dataBMI2,
+  dataHI,
+  dataHI2,
 } from "../const";
 
 import {
   handleGraphBMI,
+  handleGraphHI,
   handleLogicWeight,
   handleLogicHeight,
   handleLogicHeartBeat,
   handleLogicBMI,
+  handleLogicHI,
   handleLogicBloodPressure,
 } from "../utils/index";
 
@@ -43,17 +66,25 @@ ChartJS.register(
   Legend
 );
 const options = {
-  tooltips: true,
   responsive: true,
+  tooltips: true,
   plugins: {
     legend: {
       position: "top",
     },
-    // title: {
-    //   display: true,
-    //   text: "Chiều cao",
-    // },
+    zoom: {
+      zoom: {
+        wheel: {
+          enable: true,
+        },
+      },
+    },
   },
+  //   // title: {
+  //   //   display: true,
+  //   //   text: "Chiều cao",
+  //   // },
+  // },
   scales: {
     xAxes: [
       {
@@ -93,12 +124,12 @@ const style = {
 };
 const style2 = {
   borderColor: "black",
-  borderWidth: 5,
+  borderWidth: 4,
   backgroundColor: "black",
   pointBackgroundColor: "black",
   pointBorderColor: "black",
-  pointRadius: 4,
-  pointHoverRadius: 5,
+  pointRadius: 3.5,
+  pointHoverRadius: 4,
   showLine: true,
 };
 const Tab2 = () => {
@@ -121,13 +152,7 @@ const Tab2 = () => {
   const [stateDataBloodPressureUpdate, setStateDataBloodPressureUpdate] =
     useState(null);
 
-  const [healthIndex, setHealthIndex] = useState([
-    { resultUH: 2, label: "UH" },
-    { resultLH: 2, label: "LH" },
-    { resultSH: 2, label: "SH" },
-    { resultH: 2, label: "H" },
-  ]);
-
+  // Đưa dữ liệu chiều cao, cân nặng, nhịp tim, huyết áp lên đồ thị
   useEffect(() => {
     if (weight && height && heartBeat && bloodPressure && submit) {
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
@@ -153,7 +178,7 @@ const Tab2 = () => {
     stateResultHeight.map((item) => {
       dataHeightUpdate.push({
         data: [
-          { x: 145, y: item.result },
+          { x: 140, y: item.result },
           { x: height, y: item.result },
           { x: height, y: 0 },
         ],
@@ -192,7 +217,7 @@ const Tab2 = () => {
     stateResultBloodPressure.map((item) => {
       dataBloodPressureUpdate.push({
         data: [
-          { x: 70, y: item.result },
+          { x: 60, y: item.result },
           { x: bloodPressure, y: item.result },
           { x: bloodPressure, y: 0 },
         ],
@@ -241,7 +266,11 @@ const Tab2 = () => {
     stateDataHeartBeatUpdate,
     stateDataBloodPressureUpdate,
   ]);
+  //----------------------------------------------------------
 
+
+  
+  // Sử dụng hệ mờ với 2 chỉ số chiều cao, cân nặng để tính chỉ số BMI và in kết quả lên đồ thị
   const [a, setA] = useState([
     { resultTC: 2, label: "TC" },
     { resultCD: 2, label: "CD" },
@@ -256,40 +285,36 @@ const Tab2 = () => {
   const [stateDataUpdate_CD, setStateDataUpdate_CD] = useState(null);
   const [stateDataUpdate_TBP, setStateDataUpdate_TBP] = useState(null);
   const [stateDataUpdate_BP, setStateDataUpdate_BP] = useState(null);
+  const [dataFinalBMI, setDataFinalBMI] = useState(dataBMI);
 
   const [stateDataBMIUpdate, setStateDataBMIUpdate] = useState(null);
-  const [dataFinalBMI, setDataFinalBMI] = useState(dataBMI);
-  const [dataFinalBMI2, setDataFinalBMI2] = useState(dataBMI2);
+  const [dataFinalBMI2, setDataFinalBMI2] = useState(dataBMI);
   const [stateResultBMI, setStateResultBMI] = useState([]);
-  // let BMI = useRef(10000);
-  // console.log("BMI.current", BMI.current);
-  let BMIGraph2 = useRef();
-  let newPointList = useRef([]);
-  let minX = 10000;
-  let maxY = -10000;
-  newPointList.current.forEach((item) => {
-    if (item.y > 0) {
-      if (item.y > maxY) {
-        maxY = item.y;
-      }
-    }
-  });
-  newPointList.current.forEach((item) => {
-    if (item.y === maxY) {
-      if (item.x < minX) {
-        minX = item.x;
-      }
-    }
-  });
 
-  // console.log("BMIGraph2.current", BMIGraph2.current);
+  let newBmiPointList = useRef([]);
+  let minXBmi = 10000;
+  let maxYBmi = -10000;
+  newBmiPointList.current.forEach((item) => {
+    if (item.y > 0) {
+      if (item.y > maxYBmi) {
+        maxYBmi = item.y;
+      }
+    }
+  });
+  newBmiPointList.current.forEach((item) => {
+    if (item.y === maxYBmi) {
+      if (item.x < minXBmi) {
+        minXBmi = item.x;
+      }
+    }
+  });
   useEffect(() => {
     const TCPoint = handleGraphBMI(a[0].resultTC, a[0].label);
     const CDPoint = handleGraphBMI(a[1].resultCD, a[1].label);
     const TBPPoint = handleGraphBMI(a[2].resultTBP, a[2].label);
     const BPPoint = handleGraphBMI(a[3].resultBP, a[3].label);
     if (TCPoint !== undefined) {
-      newPointList.current = [...newPointList.current, ...TCPoint];
+      newBmiPointList.current = [...newBmiPointList.current, ...TCPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...TCPoint],
@@ -298,7 +323,7 @@ const Tab2 = () => {
       setStateDataUpdate_TC(dataUpdate);
     }
     if (CDPoint !== undefined) {
-      newPointList.current = [...newPointList.current, ...CDPoint];
+      newBmiPointList.current = [...newBmiPointList.current, ...CDPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...CDPoint],
@@ -307,7 +332,7 @@ const Tab2 = () => {
       setStateDataUpdate_CD(dataUpdate);
     }
     if (TBPPoint !== undefined) {
-      newPointList.current = [...newPointList.current, ...TBPPoint];
+      newBmiPointList.current = [...newBmiPointList.current, ...TBPPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...TBPPoint],
@@ -316,7 +341,7 @@ const Tab2 = () => {
       setStateDataUpdate_TBP(dataUpdate);
     }
     if (BPPoint !== undefined) {
-      newPointList.current = [...newPointList.current, ...BPPoint];
+      newBmiPointList.current = [...newBmiPointList.current, ...BPPoint];
       let dataUpdate = [];
       dataUpdate.push({
         data: [...BPPoint],
@@ -326,24 +351,24 @@ const Tab2 = () => {
     }
   }, [a]);
   useEffect(() => {
-    const tmp = handleLogicBMI(minX);
-    BMIGraph2.current = tmp;
+    const tmp = handleLogicBMI(minXBmi);
     setStateResultBMI(tmp);
-  }, [minX]);
+  }, [minXBmi]);
+
   useEffect(() => {
     let dataBMIUpdate = [];
     stateResultBMI.map((item) => {
       dataBMIUpdate.push({
         data: [
           { x: 16, y: item.result },
-          { x: minX, y: item.result },
-          { x: minX, y: 0 },
+          { x: minXBmi, y: item.result },
+          { x: minXBmi, y: 0 },
         ],
         ...style,
       });
     });
     setStateDataBMIUpdate(dataBMIUpdate);
-  }, [stateResultBMI, minX]);
+  }, [stateResultBMI, minXBmi]);
   useEffect(() => {
     if (stateDataBMIUpdate) {
       setDataFinalBMI2({
@@ -352,13 +377,12 @@ const Tab2 = () => {
       });
     }
   }, [stateDataBMIUpdate]);
-
   useEffect(() => {
     if (stateDataUpdate_TC) {
       setDataFinalBMI((pre) => {
         return {
           ...pre,
-          datasets: [...pre.datasets, ...stateDataUpdate_CD],
+          datasets: [...pre.datasets, ...stateDataUpdate_TC],
         };
       });
     }
@@ -392,6 +416,18 @@ const Tab2 = () => {
     stateDataUpdate_TBP,
     stateDataUpdate_BP,
   ]);
+  //----------------------------------------------------------
+
+
+
+
+  // Sử dụng hệ mờ với 3 chỉ số BMI, nhịp tim và huyết áp để tính chỉ số HI và in kết quả lên đồ thị
+  const [healthIndex, setHealthIndex] = useState([
+    { resultUH: 2, label: "UH" },
+    { resultLH: 2, label: "LH" },
+    { resultSH: 2, label: "SH" },
+    { resultH: 2, label: "H" },
+  ]);
   useEffect(() => {
     setHealthIndex(
       BMI_HB_BL_rule(
@@ -401,10 +437,112 @@ const Tab2 = () => {
       )
     );
   }, [stateResultBMI, stateResultHeartBeat, stateResultBloodPressure]);
+  const [newHIPoint, setNewHIPoint] = useState([]);
+  const [UHPoint, setUHPoint] = useState([]);
+  const [LHPoint, setLHPoint] = useState([]);
+  const [SHPoint, setSHPoint] = useState([]);
+  const [HPoint, setHPoint] = useState([]);
+
+  const [stateDataHIUpdate, setStateDataHIUpdate] = useState(null);
+  const [stateDataHIUpdate2, setStateDataHIUpdate2] = useState(null);
+  const [dataFinalHI, setDataFinalHI] = useState(dataHI);
+  const [dataFinalHI2, setDataFinalHI2] = useState(dataHI2);
+  const [resultHI, setResultHI] = useState(undefined);
 
   useEffect(() => {
-    console.log("@@@@@@@@@@@@@@@@@@@@: ", healthIndex);
+    console.log("healthIndex", healthIndex);
+    setUHPoint(handleGraphHI(healthIndex[0].resultUH, healthIndex[0].label));
+    setLHPoint(handleGraphHI(healthIndex[1].resultLH, healthIndex[1].label));
+    setSHPoint(handleGraphHI(healthIndex[2].resultSH, healthIndex[2].label));
+    setHPoint(handleGraphHI(healthIndex[3].resultH, healthIndex[3].label));
   }, [healthIndex]);
+  useEffect(() => {
+    console.log("UHPoint", UHPoint);
+    console.log("LHPoint", LHPoint);
+    console.log("SHPoint", SHPoint);
+    console.log("HPoint", HPoint);
+    if (
+      UHPoint !== undefined &&
+      LHPoint !== undefined &&
+      SHPoint !== undefined &&
+      HPoint !== undefined
+    ) {
+      setNewHIPoint([...UHPoint, ...LHPoint, ...SHPoint, ...HPoint]);
+    }
+  }, [HPoint]);
+  const [minXHi, setMinXHi] = useState(10000);
+  const [maxYHi, setMaxYHi] = useState(-10000);
+  useEffect(() => {
+    newHIPoint.forEach((item) => {
+      if (item.y > 0) {
+        if (item.y > maxYHi) {
+          setMaxYHi(item.y);
+        }
+      }
+    });
+  }, [newHIPoint, maxYHi]);
+  useEffect(() => {
+    newHIPoint.forEach((item) => {
+      if (item.y === maxYHi) {
+        if (item.x < minXHi) {
+          setMinXHi(item.x);
+        }
+      }
+    });
+  }, [minXHi, maxYHi]);
+  useEffect(() => {
+    console.log("minXHi", minXHi);
+    console.log("maxYHi", maxYHi);
+    console.log("newHIPoint", newHIPoint);
+    let dataHIUpdate = [];
+    dataHIUpdate.push({
+      data: [...newHIPoint],
+      ...style,
+    });
+    setStateDataHIUpdate(dataHIUpdate);
+    setResultHI(handleLogicHI(minXHi));
+  }, [minXHi]);
+  useEffect(() => {
+    if (stateDataHIUpdate) {
+      setDataFinalHI(() => {
+        return {
+          ...dataFinalHI,
+          datasets: [...dataFinalHI.datasets, ...stateDataHIUpdate],
+        };
+      });
+    }
+  }, [stateDataHIUpdate]);
+  useEffect(() => {
+    let dataHIUpdate = [];
+    if (
+      resultHI !== undefined &&
+      resultHI.length === 1 &&
+      resultHI[0].result === maxYHi
+    ) {
+      console.log("resultHI", resultHI);
+      resultHI.map((item) => {
+        dataHIUpdate.push({
+          data: [
+            { x: 0, y: item.result },
+            { x: minXHi, y: item.result },
+            { x: minXHi, y: 0 },
+          ],
+          ...style,
+        });
+      });
+      setStateDataHIUpdate2(dataHIUpdate);
+    }
+  }, [resultHI]);
+  useEffect(() => {
+    console.log("stateDataHIUpdate2", stateDataHIUpdate2);
+    if (stateDataHIUpdate2) {
+      setDataFinalHI2({
+        ...dataFinalHI2,
+        datasets: [...dataFinalHI2.datasets, ...stateDataHIUpdate2],
+      });
+    }
+  }, [stateDataHIUpdate2]);
+  //----------------------------------------------------------
   return (
     <>
       <div className="grid-cols-2 grid gap-8 ">
@@ -418,10 +556,16 @@ const Tab2 = () => {
                 content: (
                   //thay cho nay
                   <div>
-                    <p>Chieu cao</p>
-                    <img src={abc}></img>
-                    <img src={abc}></img>
-                    <img src={abc}></img>
+                    <p>Rất thấp</p>
+                    <img src={chieucao1}></img>
+                    <p>Thấp</p>
+                    <img src={chieucao2}></img>
+                    <p>Trung bình</p>
+                    <img src={chieucao3}></img>
+                    <p>Cao</p>
+                    <img src={chieucao4}></img>
+                    <p>Rất cao</p>
+                    <img src={chieucao5}></img>
                   </div>
                 ),
                 onConfirm: () => {
@@ -437,28 +581,185 @@ const Tab2 = () => {
         <div className="max-w-sm w-full m-auto">
           <p>Khối lượng cơ thể</p>
           <Scatter options={options} data={dataFinalWeight}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <p>Rất nhẹ</p>
+                    <img src={cannang1}></img>
+                    <p>Nhẹ</p>
+                    <img src={cannang2}></img>
+                    <p>Trung bình</p>
+                    <img src={cannang3}></img>
+                    <p>Nặng</p>
+                    <img src={cannang4}></img>
+                    <p>Rất nặng</p>
+                    <img src={cannang5}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Hàm thành viên
+          </Button>
         </div>
       </div>
       <div className=" w-full">
         <div className="max-w-sm m-auto">
-          <p>Đồ thị BMI 1</p>
+          <p>
+            Sử dụng hệ mờ với 2 chỉ số chiều cao và khối lượng cơ thể, ta có kết
+            quả như sau
+          </p>
+          <p>BMI</p>
           <Scatter options={options} data={dataFinalBMI}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <img src={bmiRule}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Luật
+          </Button>
+        </div>
+      </div>
+      <div className=" w-full">
+        <div className="max-w-sm m-auto">
+          <p>
+            Giải mờ theo phương pháp cực đại gần nhất, ta tính được BMI như bên
+            dưới
+          </p>
+          <p>BMI</p>
+          <Scatter options={options} data={dataFinalBMI2}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <p>Thiếu cân</p>
+                    <img src={BMI1}></img>
+                    <p>Cân đối</p>
+                    <img src={BMI2}></img>
+                    <p>Tiền béo phì</p>
+                    <img src={BMI3}></img>
+                    <p>Béo phì</p>
+                    <img src={BMI4}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Hàm thành viên
+          </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-3">
-        <div className="max-w-xs">
-          <p>Đồ thị BMI 2</p>
-          <Scatter options={options} data={dataFinalBMI2}></Scatter>
-        </div>
-        <div className="max-w-xs">
+      <div className="grid grid-cols-2">
+        <div className="max-w-xs m-auto">
           <p>Nhịp tim</p>
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
         </div>
-
-        <div className="max-w-xs">
+        <div className="max-w-xs m-auto">
           <p>Huyết áp</p>
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
+        </div>
+      </div>
+      <div className=" w-full">
+        <div className="max-w-sm m-auto">
+          <p>
+            Sử dụng hệ mờ với 3 chỉ số BMI, nhịp tim và huyết áp, ta có kết quả
+            như sau
+          </p>
+          <p>Health Index</p>
+          <Scatter options={options} data={dataFinalHI}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <img src={HI1}></img>
+                    <br></br>
+                    <img src={HI2}></img>
+                    <br></br>
+                    <img src={HI3}></img>
+                    <br></br>
+                    <img src={HI4}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Luật
+          </Button>
+        </div>
+      </div>
+      <div className=" w-full">
+        <div className="max-w-sm m-auto">
+          <p>
+            Giải mờ theo phương pháp cực đại gần nhất, ta tính đc chỉ số sức
+            khỏe như bên dưới
+          </p>
+          <p>Health Index</p>
+          <Scatter options={options} data={dataFinalHI2}></Scatter>
+          <Button
+            block
+            onClick={() =>
+              Modal.alert({
+                content: (
+                  //thay cho nay
+                  <div>
+                    <img src={HI1}></img>
+                    <br></br>
+                    <img src={HI2}></img>
+                    <br></br>
+                    <img src={HI3}></img>
+                    <br></br>
+                    <img src={HI4}></img>
+                  </div>
+                ),
+                onConfirm: () => {
+                  console.log("Confirmed");
+                },
+                confirmText: "OK",
+              })
+            }
+          >
+            Hàm thành viên
+          </Button>
+        </div>
+      </div>
+      <div className=" w-full">
+        <div className="max-w-sm m-auto">
+          <h2>{minXHi && `Chỉ số sức khỏe của bạn là ${minXHi}`}</h2>
         </div>
       </div>
     </>

@@ -320,6 +320,103 @@ export const handleLogicWeight = (weight) => {
 
   return resultWeight;
 };
+export const handleLogicHI = (HI) => {
+  let resultHI = [];
+  if (1 <= HI && HI < 25) {
+    resultHI.push({
+      result: leftTrapezoid(HI, 1, 25),
+      label: "UH",
+    });
+  }
+  if (HI === 25) {
+    resultHI.push({ result: 1, label: "UH" });
+  }
+  if (25 < HI && HI < 35) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 25, 45),
+      label: "UH",
+    });
+  }
+  if (35 <= HI && HI <= 45) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 25, 45),
+      label: "UH",
+    });
+    resultHI.push({
+      result: leftTrapezoid(HI, 35, 50),
+      label: "LH",
+    });
+  }
+  if (45 < HI && HI < 50) {
+     resultHI.push({
+       result: leftTrapezoid(HI, 35, 50),
+       label: "LH",
+     });
+  }
+  if (HI === 50) {
+    resultHI.push({ result: 1, label: "LH" });
+  }
+  if (50 < HI && HI < 55) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 50, 70),
+      label: "LH",
+    });
+  }
+  if (55 <= HI && HI <= 70) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 50, 70),
+      label: "LH",
+    });
+    resultHI.push({
+      result: leftTrapezoid(HI, 55, 75),
+      label: "SH",
+    });
+  }
+  if (70 < HI && HI < 75) {
+    resultHI.push({
+      result: leftTrapezoid(HI, 55, 75),
+      label: "SH",
+    });
+  }
+  if (HI === 75) {
+    resultHI.push({ result: 1, label: "SH" });
+  }
+  if (75 < HI && HI < 80) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 75, 85),
+      label: "SH",
+    });
+  }
+  if (80 <= HI && HI <= 85) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 75, 85),
+      label: "SH",
+    });
+    resultHI.push({
+      result: leftTrapezoid(HI, 80, 90),
+      label: "H",
+    });
+  }
+  if (85 < HI && HI < 90) {
+    resultHI.push({
+      result: leftTrapezoid(HI, 80, 90),
+      label: "H",
+    });
+  }
+  if (HI === 90) {
+    resultHI.push({ result: 1, label: "H" });
+  }
+  if (90 < HI && HI <= 100) {
+    resultHI.push({
+      result: rightTrapezoid(HI, 90, 100),
+      label: "H",
+    });
+  }
+  return resultHI;
+};
+
+
+
 export const handleGraphBMI = (y, label) => {
   let x1;
   let x2;
@@ -327,7 +424,7 @@ export const handleGraphBMI = (y, label) => {
     if (y > 0 && y < 1) {
       x1 = 18.5 - 1.5 * y;
       return [
-        { x: 0, y },
+        { x: 16, y },
         { x: x1, y },
         { x: 18.5, y: 0 },
         { x: 16, y: 0 },
@@ -406,6 +503,91 @@ export const handleGraphBMI = (y, label) => {
         { x: x1, y },
         { x: x2, y },
         { x: 32, y: 0 },
+      ];
+    }
+  }
+};
+export const handleGraphHI = (y, label) => {
+  let x1;
+  let x2;
+  if (label === "UH") {
+    if (y > 0 && y < 1) {
+      x1 = 1 + 24 * y;
+      x2 = 45 - 20 * y;
+      return [
+        { x: 1, y: 0 },
+        { x: x1, y },
+        { x: x2, y },
+        { x: 45, y: 0 },
+      ];
+    }
+    if (y === 1) {
+      x1 = 25;
+      return [
+        { x: 1, y: 0 },
+        { x: x1, y },
+        { x: 45, y: 0 },
+      ];
+    }
+  }
+  if (label === "LH") {
+    if (y > 0 && y < 1) {
+      x1 = 35 + 15 * y;
+      x2 = 70 - 20 * y;
+      return [
+        { x: 35, y: 0 },
+        { x: x1, y },
+        { x: x2, y },
+        { x: 70, y: 0 },
+      ];
+    }
+    if (y === 1) {
+      x1 = 50;
+      return [
+        { x: 35, y: 0 },
+        { x: x1, y },
+
+        { x: 70, y: 0 },
+      ];
+    }
+  }
+  if (label === "SH") {
+    if (y > 0 && y < 1) {
+      x1 = 55 + 20 * y;
+      x2 = 85 - 10 * y;
+      return [
+        { x: 55, y: 0 },
+        { x: x1, y },
+        { x: x2, y },
+        { x: 85, y: 0 },
+      ];
+    }
+    if (y === 1) {
+      x1 = 75;
+      return [
+        { x: 55, y: 0 },
+        { x: x1, y },
+        { x: 85, y: 0 },
+      ];
+    }
+  }
+  if (label === "H") {
+    if (y > 0 && y < 1) {
+      x1 = 80 + 10 * y;
+      x2 = 100 - 10 * y;
+      return [
+        { x: 80, y: 0 },
+        { x: x1, y },
+        { x: x2, y },
+        { x: 100, y: 0 },
+      ];
+    }
+    if (y === 1) {
+      x1 = 90;
+      return [
+        { x: 80, y: 0 },
+        { x: x1, y },
+        { x: 100, y: 0 },
       ];
     }
   }

@@ -653,7 +653,7 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Chiều cao</p>
           <Scatter options={options} data={dataFinalHeight}></Scatter>
-          <p>[RT, T, TB, C, RC]</p>
+          <p>f = [RT, T, TB, C, RC]</p>
           <p>
             {detailHeight !== [] &&
               detailHeight.map((item) => `${item.result}, `)}
@@ -692,7 +692,7 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Khối lượng cơ thể</p>
           <Scatter options={options} data={dataFinalWeight}></Scatter>
-          <p>[RN, N, TB, NA, RNA]</p>
+          <p>f = [RN, N, TB, NA, RNA]</p>
           <p>
             {detailWeight !== [] &&
               detailWeight.map((item) => `${item.result}, `)}
@@ -764,7 +764,7 @@ const Tab2 = () => {
           </p>
           <p>BMI</p>
           <Scatter options={options} data={dataFinalBMI2}></Scatter>
-          <p>[TC, CD, TBP, BP]</p>
+          <p>f = [TC, CD, TBP, BP]</p>
           <p>
             {detailBMI !== [] && detailBMI.map((item) => `${item.result}, `)}
           </p>
@@ -803,7 +803,7 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Nhịp tim</p>
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
-          <p>[T, TB, C]</p>
+          <p>f = [T, TB, C]</p>
           <p>
             {detailHeartBeat !== [] &&
               detailHeartBeat.map((item) => `${item.result}, `)}
@@ -840,7 +840,7 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Huyết áp</p>
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
-          <p>[T, TB, C]</p>
+          <p>f = [T, TB, C]</p>
           <p>
             {detailBloodPressure !== [] &&
               detailBloodPressure.map((item) => `${item.result}, `)}
@@ -950,7 +950,7 @@ const Tab2 = () => {
       <div className=" w-full">
         <div className="max-w-sm m-auto">
           <p>Chỉ số sức khỏe của bạn là: {minXHi !== 10000 && minXHi}</p>
-          <p>{detail !== [] && detail.map((item) => `${item.label}, `)}</p>
+          <p>f = [{detail !== [] && detail.map((item) => `${item.label}, `)}]</p>
           <p>{detail !== [] && detail.map((item) => `${item.result}, `)}</p>
           <p>
             <i>Chú thích:</i> UH: Yếu, LH: Không khỏe lắm, SH: Có vẻ khỏe, H:

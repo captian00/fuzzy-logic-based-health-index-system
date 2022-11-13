@@ -165,6 +165,7 @@ const Tab2 = () => {
     useState(null);
   useEffect(() => {
     if (weight && height && heartBeat && bloodPressure && submit) {
+      
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
       setStateResultHeight(handleLogicHeight(height));
@@ -182,14 +183,59 @@ const Tab2 = () => {
       setDataFinalBMI2(dataBMI2);
     }
     if (!weight && !height && !heartBeat && !bloodPressure) {
+      setStateResultHeartBeat([]);
+      setStateResultBloodPressure([]);
+      setStateResultHeight([]);
+      setStateResultWeight([]);
+      setStateDataHeightUpdate(null)
+      setStateDataWeightUpdate(null)
+      setStateDataHeartBeatUpdate(null)
+      setStateDataBloodPressureUpdate(null)
       setDataFinalHeight(dataHeight);
       setDataFinalWeight(dataWeight);
       setDataFinalHeartBeat(dataHeartBeat);
       setDataFinalBloodPressure(dataBloodPressure);
+
+      setA([
+        { resultTC: 2, label: "TC" },
+        { resultCD: 2, label: "CD" },
+        { resultTBP: 2, label: "TBP" },
+        { resultBP: 2, label: "BP" },
+      ]);
+      newBmiPointList.current=[]
       setDataFinalBMI(dataBMI);
+      setStateDataUpdate_TC(null);
+      setStateDataUpdate_CD(null);
+      setStateDataUpdate_TBP(null);
+      setStateDataUpdate_BP(null);
+
+
+      setStateDataBMIUpdate(null);
       setDataFinalBMI2(dataBMI2);
+      
+      
+      setStateDataHIUpdate(null);
       setDataFinalHI(dataHI);
+
+      setStateDataHIUpdate2(null);
       setDataFinalHI2(dataHI2);
+      setNewHIPoint([])
+      setUHPoint([]);
+      setLHPoint([]);
+      setSHPoint([]);
+      setHPoint([]);
+      
+      setHealthIndex([
+        { resultUH: 2, label: "UH" },
+        { resultLH: 2, label: "LH" },
+        { resultSH: 2, label: "SH" },
+        { resultH: 2, label: "H" },
+      ]);
+      setMaxYHi(-10000)
+      setMinXHi(10000)
+      minXBmi = 10000;
+      maxYBmi = -10000;
+      
     }
   }, [weight, height, heartBeat, bloodPressure, submit]);
 
@@ -378,7 +424,7 @@ const Tab2 = () => {
     stateResultBMI.map((item) => {
       dataBMIUpdate.push({
         data: [
-          { x: 16, y: item.result },
+          { x: 0, y: item.result },
           { x: minXBmi, y: item.result },
           { x: minXBmi, y: 0 },
         ],
@@ -462,16 +508,60 @@ const Tab2 = () => {
   const [stateDataHIUpdate2, setStateDataHIUpdate2] = useState(null);
   const [dataFinalHI, setDataFinalHI] = useState(dataHI);
   const [dataFinalHI2, setDataFinalHI2] = useState(dataHI2);
-  const [resultHI, setResultHI] = useState(undefined);
-
+  const [resultHI, setResultHI] = useState([]);
   useEffect(() => {
-    setUHPoint(handleGraphHI(healthIndex[0].resultUH, healthIndex[0].label));
-    setLHPoint(handleGraphHI(healthIndex[1].resultLH, healthIndex[1].label));
-    setSHPoint(handleGraphHI(healthIndex[2].resultSH, healthIndex[2].label));
-    setHPoint(handleGraphHI(healthIndex[3].resultH, healthIndex[3].label));
+    console.log("healthIndex", healthIndex);
+    const tmp1 = handleGraphHI(healthIndex[0].resultUH, healthIndex[0].label);
+    const tmp2 = handleGraphHI(healthIndex[1].resultLH, healthIndex[1].label);
+    const tmp3 = handleGraphHI(healthIndex[2].resultSH, healthIndex[2].label);
+    const tmp4 = handleGraphHI(healthIndex[3].resultH, healthIndex[3].label);
+
+    if (tmp1 !== [] && tmp1 !== undefined) {
+      setUHPoint((pre) => {
+        if (pre !== tmp1) {
+          return tmp1;
+        } else if (pre === tmp1) {
+          return pre;
+        }
+      });
+    }
+    if (tmp2 !== [] && tmp2 !== undefined) {
+      setLHPoint((pre) => {
+        if (pre !== tmp2) {
+          return tmp2;
+        } else if (pre === tmp2) {
+          return pre;
+        }
+      });
+    }
+    if (tmp3 !== [] && tmp3 !== undefined) {
+      setSHPoint((pre) => {
+        if (pre !== tmp3) {
+          return tmp3;
+        } else if (pre === tmp3) {
+          return pre;
+        }
+      });
+    }
+    if (tmp4 !== [] && tmp4 !== undefined) {
+      setHPoint((pre) => {
+        if (pre !== tmp4) {
+          return tmp4;
+        } else if (pre === tmp4) {
+          return pre;
+        }
+      });
+    }
   }, [healthIndex]);
   useEffect(() => {
-    setNewHIPoint([...UHPoint, ...LHPoint, ...SHPoint, ...HPoint]);
+    if (
+      UHPoint !== undefined &&
+      LHPoint !== undefined &&
+      SHPoint !== undefined &&
+      HPoint !== undefined
+    ) {
+      setNewHIPoint([...UHPoint, ...LHPoint, ...SHPoint, ...HPoint]);
+    }
   }, [HPoint, UHPoint, SHPoint, LHPoint]);
 
   const [minXHi, setMinXHi] = useState(10000);
@@ -484,7 +574,7 @@ const Tab2 = () => {
         }
       }
     });
-  }, [newHIPoint, maxYHi]);
+  }, [maxYHi, newHIPoint]);
   useEffect(() => {
     newHIPoint.forEach((item) => {
       if (item.y === maxYHi) {
@@ -493,23 +583,20 @@ const Tab2 = () => {
         }
       }
     });
-  }, [minXHi, maxYHi]);
+  }, [maxYHi, minXHi, newHIPoint]);
   useEffect(() => {
     let dataHIUpdate = [];
     dataHIUpdate.push({
       data: [...newHIPoint],
-      ...style,
+      ...style2,
     });
-    console.log("dataHIUpdate: ", dataHIUpdate);
     setStateDataHIUpdate(dataHIUpdate);
     setResultHI(handleLogicHI(minXHi));
+    console.log("minXHi", minXHi);
   }, [minXHi, newHIPoint]);
 
   useEffect(() => {
     if (stateDataHIUpdate) {
-      console.log("@@@stateDataHIUpdate: ", stateDataHIUpdate);
-      console.log("@@@dataFinalHI: ", dataFinalHI);
-      console.log("@@@222: ", [...dataFinalHI.datasets, ...stateDataHIUpdate]);
       setDataFinalHI(() => {
         return {
           ...dataFinalHI,
@@ -520,29 +607,28 @@ const Tab2 = () => {
   }, [stateDataHIUpdate]);
   useEffect(() => {
     let dataHIUpdate = [];
-    if (
-      resultHI !== undefined &&
-      resultHI.length === 1 &&
-      resultHI[0].result === maxYHi
-    ) {
-      resultHI.map((item) => {
-        dataHIUpdate.push({
-          data: [
-            { x: 0, y: item.result },
-            { x: minXHi, y: item.result },
-            { x: minXHi, y: 0 },
-          ],
-          ...style,
-        });
+
+    console.log("resultHI", resultHI);
+    resultHI.forEach((item, index) => {
+      // if(index===0 || index ===1){
+      dataHIUpdate.push({
+        data: [
+          { x: 0, y: item.result },
+          { x: minXHi, y: item.result },
+          { x: minXHi, y: 0 },
+        ],
+        ...style,
       });
-      setStateDataHIUpdate2(dataHIUpdate);
-    }
+      // }
+    });
+    setStateDataHIUpdate2(dataHIUpdate);
   }, [resultHI]);
   useEffect(() => {
+    console.log("stateDataHIUpdate2", stateDataHIUpdate2);
     if (stateDataHIUpdate2) {
       setDataFinalHI2({
-        ...dataFinalHI2,
-        datasets: [...dataFinalHI2.datasets, ...stateDataHIUpdate2],
+        ...dataHI,
+        datasets: [...dataHI.datasets, ...stateDataHIUpdate2],
       });
     }
   }, [stateDataHIUpdate2]);

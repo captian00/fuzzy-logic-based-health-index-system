@@ -37,31 +37,61 @@ const Tab1 = () => {
     //   arr = [...arr, { label: "Y", result: 0 }];
     // }
     if (kq < 25 && kq > 1) {
-      arr = [...arr, { label: "Y", result: left(kq, 1, 25) }];
+      arr = [...arr, { label: "Yếu", result: left(kq, 1, 25) }];
     }
-    if (kq < 45 && kq > 25) {
-      arr = [...arr, { label: "Y", result: right(kq, 25, 45) }];
+    if (kq === 25 ) {
+      arr = [...arr, { label: "Yếu", result: 1 }];
     }
-
-    if (kq < 50 && kq > 35) {
-      arr = [...arr, { label: "KKL", result: left(kq, 35, 50) }];
+    if (kq < 35 && kq > 25) {
+      arr = [...arr, { label: "Yếu", result: right(kq, 25, 45) }];
     }
-    if (kq < 70 && kq > 50) {
-      arr = [...arr, { label: "KKL", result: right(kq, 50, 70) }];
+    if (kq >= 35 && kq <= 45) {
+      arr = [
+        ...arr,
+        { label: "Yếu", result: right(kq, 25, 45) },
+        { label: "Không khỏe lắm", result: left(kq, 35, 50) },
+      ];
     }
-
-    if (kq < 75 && kq > 55) {
-      arr = [...arr, { label: "CVK", result: left(kq, 55, 75) }];
+    if (kq < 50 && kq > 45) {
+      arr = [...arr, { label: "Không khỏe lắm", result: left(kq, 35, 50) }];
     }
-    if (kq < 85 && kq > 75) {
-      arr = [...arr, { label: "CVK", result: right(kq, 75, 85) }];
+    if (kq === 50) {
+      arr = [...arr, { label: "Không khỏe lắm", result: 1 }];
     }
-
-    if (kq < 90 && kq > 80) {
-      arr = [...arr, { label: "K", result: left(kq, 80, 90) }];
+    if (kq < 55 && kq > 50) {
+      arr = [...arr, { label: "Không khỏe lắm", result: right(kq, 50, 70) }];
+    }
+    if (kq >= 55 && kq <= 70) {
+      arr = [
+        ...arr,
+        { label: "Không khỏe lắm", result: right(kq, 50, 70) },
+        { label: "Có vẻ khỏe", result: left(kq, 55, 75) },
+      ];
+    }
+    if (kq < 75 && kq > 70) {
+      arr = [...arr, { label: "Có vẻ khỏe", result: left(kq, 55, 75) }];
+    }
+     if (kq === 75) {
+       arr = [...arr, { label: "Có vẻ khỏe", result: 1 }];
+     }
+    if (kq < 80 && kq > 75) {
+      arr = [...arr, { label: "Có vẻ khỏe", result: right(kq, 75, 85) }];
+    }
+    if (kq >= 80 && kq <= 85) {
+      arr = [
+        ...arr,
+        { label: "Có vẻ khỏe", result: right(kq, 75, 85) },
+        { label: "Khỏe", result: left(kq, 80, 90) },
+      ];
+    }
+    if (kq < 90 && kq > 85) {
+      arr = [...arr, { label: "Khỏe", result: left(kq, 80, 90) }];
+    }
+    if (kq === 90) {
+      arr = [...arr, { label: "Khỏe", result: 1 }];
     }
     if (kq < 100 && kq > 90) {
-      arr = [...arr, { label: "K", result: right(kq, 90, 100) }];
+      arr = [...arr, { label: "Khỏe", result: right(kq, 90, 100) }];
     }
     // setDetail(arr);
     return arr;
@@ -89,7 +119,7 @@ const Tab1 = () => {
   useEffect(() => {
     setDetail(showDetail(kq));
   }, [kq]);
-  console.log("detail: ", detail);
+  // console.log("detail: ", detail);
   return (
     <>
       <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
@@ -175,7 +205,7 @@ const Tab1 = () => {
       </Form>
       <p>{`Chỉ số sức khỏe: ${kq}`}</p>
       {detail.map((item) => (
-        <p>{`${item.label}: ${item.result}`}</p>
+        <p>{`Thuộc loại ${item.label}: ${item.result*100}%`}</p>
       ))}
     </>
   );

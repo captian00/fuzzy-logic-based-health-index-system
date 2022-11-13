@@ -50,7 +50,13 @@ export const handleLogicBloodPressure = (bloodPressure) => {
 };
 export const handleLogicBMI = (BMI) => {
   let resultBMI = [];
-  if (BMI <= 17) {
+  if (12 <= BMI && BMI < 16) {
+    resultBMI.push({
+      result: leftTrapezoid(BMI, 12, 16),
+      label: "TC",
+    });
+  }
+  if (16<= BMI && BMI <= 17) {
     resultBMI.push({ result: 1, label: "TC" });
   }
   if (17 < BMI && BMI < 18) {
@@ -130,8 +136,14 @@ export const handleLogicBMI = (BMI) => {
       label: "BP",
     });
   }
-  if (BMI >= 30) {
+  if (BMI >= 30 && BMI <=32) {
     resultBMI.push({ result: 1, label: "BP" });
+  }
+  if (BMI > 32 && BMI <= 34) {
+     resultBMI.push({
+       result: rightTrapezoid(BMI, 32, 34),
+       label: "TBP",
+     });
   }
   return resultBMI;
 };
@@ -425,22 +437,25 @@ export const handleGraphBMI = (y, label) => {
   let x2;
   if (label === "TC") {
     if (y > 0 && y < 1) {
-      x1 = 18.5 - 1.5 * y;
+      x1 = 12+ 4*y
+      x2 = 18.5 - 1.5 * y;
+
       return [
-        { x: 16, y },
+        { x: 12, y:0 },
         { x: x1, y },
+        { x: x2, y },
         { x: 18.5, y: 0 },
-        { x: 16, y: 0 },
+
       ];
     }
     if (y === 1) {
       x1 = 16;
       x2 = 17;
       return [
+        { x: 12, y: 0 },
         { x: x1, y },
         { x: x2, y },
         { x: 18.5, y: 0 },
-        { x: 16, y: 0 },
       ];
     }
   }
@@ -491,11 +506,12 @@ export const handleGraphBMI = (y, label) => {
   if (label === "BP") {
     if (y > 0 && y < 1) {
       x1 = 28 + 2 * y;
+      x2 = 34 - 2*y
       return [
         { x: 28, y: 0 },
         { x: x1, y },
-        { x: 32, y },
-        { x: 32, y: 0 },
+        { x: x2, y },
+        { x: 34, y: 0 },
       ];
     }
     if (y === 1) {
@@ -505,7 +521,7 @@ export const handleGraphBMI = (y, label) => {
         { x: 28, y: 0 },
         { x: x1, y },
         { x: x2, y },
-        { x: 32, y: 0 },
+        { x: 34, y: 0 },
       ];
     }
   }
@@ -594,6 +610,5 @@ export const handleGraphHI = (y, label) => {
       ];
     }
   }
-  return [];
 };
 //-----------------------------------------

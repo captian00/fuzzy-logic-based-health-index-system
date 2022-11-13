@@ -318,6 +318,7 @@ export const dataBMI = {
     {
       label: "Thiếu cân",
       data: [
+        {x:12,y:0},
         { x: 16, y: 1 },
         { x: 17, y: 1 },
         { x: 18.5, y: 0 },
@@ -377,6 +378,7 @@ export const dataBMI = {
         { x: 28, y: 0 },
         { x: 30, y: 1 },
         { x: 32, y: 1 },
+        {x:34,y:0},
       ],
       borderColor: "orange",
       borderWidth: 2,
@@ -396,6 +398,7 @@ export const dataBMI2 = {
     {
       label: "Thiếu cân",
       data: [
+        { x: 12, y: 0 },
         { x: 16, y: 1 },
         { x: 17, y: 1 },
         { x: 18.5, y: 0 },
@@ -455,6 +458,7 @@ export const dataBMI2 = {
         { x: 28, y: 0 },
         { x: 30, y: 1 },
         { x: 32, y: 1 },
+        { x: 34, y: 0 },
       ],
       borderColor: "orange",
       borderWidth: 2,

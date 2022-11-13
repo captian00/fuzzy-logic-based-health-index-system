@@ -35,7 +35,7 @@ const Main = () => {
             <Tabs.TabPane tab="Nhập thông tin" key="1">
               <Tab1 />
             </Tabs.TabPane>
-            <Tabs.TabPane tab="Hiển thị kết quả" key="2">
+            <Tabs.TabPane tab="Xem kết quả chi tiết" key="2">
               <Tab2 />
             </Tabs.TabPane>
           </Tabs>

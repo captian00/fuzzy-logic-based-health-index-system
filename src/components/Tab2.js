@@ -64,6 +64,12 @@ import {
   handleLogicBMI,
   handleLogicHI,
   handleLogicBloodPressure,
+  showDetail,
+  showDetailHeight,
+  showDetailWeight,
+  showDetailHeartBeat,
+  showDetailBloodPressure,
+  showDetailBMI,
 } from "../utils/index";
 
 ChartJS.register(
@@ -134,7 +140,7 @@ const style = {
 };
 const style2 = {
   borderColor: "black",
-  borderWidth: 4,
+  borderWidth: 3.5,
   backgroundColor: "black",
   pointBackgroundColor: "black",
   pointBorderColor: "black",
@@ -182,15 +188,15 @@ const Tab2 = () => {
       setStateDataBloodPressureUpdate(null);
       setDataFinalBMI2(dataBMI2);
     }
-    if (!weight && !height && !heartBeat && !bloodPressure) {
+    if (!weight || !height || !heartBeat || !bloodPressure) {
       setStateResultHeartBeat([]);
       setStateResultBloodPressure([]);
       setStateResultHeight([]);
       setStateResultWeight([]);
-      setStateDataHeightUpdate(null)
-      setStateDataWeightUpdate(null)
-      setStateDataHeartBeatUpdate(null)
-      setStateDataBloodPressureUpdate(null)
+      setStateDataHeightUpdate(null);
+      setStateDataWeightUpdate(null);
+      setStateDataHeartBeatUpdate(null);
+      setStateDataBloodPressureUpdate(null);
       setDataFinalHeight(dataHeight);
       setDataFinalWeight(dataWeight);
       setDataFinalHeartBeat(dataHeartBeat);
@@ -202,40 +208,37 @@ const Tab2 = () => {
         { resultTBP: 2, label: "TBP" },
         { resultBP: 2, label: "BP" },
       ]);
-      newBmiPointList.current=[]
+      newBmiPointList.current = [];
       setDataFinalBMI(dataBMI);
       setStateDataUpdate_TC(null);
       setStateDataUpdate_CD(null);
       setStateDataUpdate_TBP(null);
       setStateDataUpdate_BP(null);
 
-
       setStateDataBMIUpdate(null);
       setDataFinalBMI2(dataBMI2);
-      
-      
+
       setStateDataHIUpdate(null);
       setDataFinalHI(dataHI);
 
       setStateDataHIUpdate2(null);
       setDataFinalHI2(dataHI2);
-      setNewHIPoint([])
+      setNewHIPoint([]);
       setUHPoint([]);
       setLHPoint([]);
       setSHPoint([]);
       setHPoint([]);
-      
+
       setHealthIndex([
         { resultUH: 2, label: "UH" },
         { resultLH: 2, label: "LH" },
         { resultSH: 2, label: "SH" },
         { resultH: 2, label: "H" },
       ]);
-      setMaxYHi(-10000)
-      setMinXHi(10000)
+      setMaxYHi(-10000);
+      setMinXHi(10000);
       minXBmi = 10000;
       maxYBmi = -10000;
-      
     }
   }, [weight, height, heartBeat, bloodPressure, submit]);
 
@@ -633,14 +636,32 @@ const Tab2 = () => {
     }
   }, [stateDataHIUpdate2]);
   setKQ(minXHi);
+  let detail =showDetail(minXHi)
 
+  let detailWeight = showDetailWeight(stateResultWeight);
+  let detailHeight = showDetailHeight(stateResultHeight);
+  console.log("detailWeight", detailWeight);
+  let detailHeartBeat = showDetailHeartBeat(stateResultHeartBeat);
+  // console.log("detailHeartBeat", detailHeartBeat);
+  let detailBloodPressure = showDetailBloodPressure(stateResultBloodPressure);
+  let detailBMI = showDetailBMI(stateResultBMI)
   //----------------------------------------------------------
+  
   return (
     <>
-      <div className="grid-cols-2 grid gap-8 ">
-        <div className="max-w-sm w-full m-auto">
+      <div className="grid grid-cols-2">
+        <div className="max-w-xs m-auto">
           <p>Chiều cao</p>
           <Scatter options={options} data={dataFinalHeight}></Scatter>
+          <p>[RT, T, TB, C, RC]</p>
+          <p>
+            {detailHeight !== [] &&
+              detailHeight.map((item) => `${item.result}, `)}
+          </p>
+          <p>
+            <i>Chú thích:</i> RT: Rất thấp, T: Thấp, TB: Trung bình, C: Cao, RC:
+            Rất cao
+          </p>
           <Button
             block
             onClick={() =>
@@ -668,9 +689,18 @@ const Tab2 = () => {
             Hàm thành viên
           </Button>
         </div>
-        <div className="max-w-sm w-full m-auto">
+        <div className="max-w-xs m-auto">
           <p>Khối lượng cơ thể</p>
           <Scatter options={options} data={dataFinalWeight}></Scatter>
+          <p>[RN, N, TB, NA, RNA]</p>
+          <p>
+            {detailWeight !== [] &&
+              detailWeight.map((item) => `${item.result}, `)}
+          </p>
+          <p>
+            <i>Chú thích:</i> RN: Nhẹ, N: Nhẹ, TB: Trung Bình, NA: Nặng, RNA:
+            Rất nặng
+          </p>
           <Button
             block
             onClick={() =>
@@ -734,6 +764,14 @@ const Tab2 = () => {
           </p>
           <p>BMI</p>
           <Scatter options={options} data={dataFinalBMI2}></Scatter>
+          <p>[TC, CD, TBP, BP]</p>
+          <p>
+            {detailBMI !== [] && detailBMI.map((item) => `${item.result}, `)}
+          </p>
+          <p>
+            <i>Chú thích:</i> TC: Thiếu cân, CD: Cân đối, TBP: Tiền béo phì, BP:
+            Béo phì
+          </p>
           <Button
             block
             onClick={() =>
@@ -765,6 +803,14 @@ const Tab2 = () => {
         <div className="max-w-xs m-auto">
           <p>Nhịp tim</p>
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
+          <p>[T, TB, C]</p>
+          <p>
+            {detailHeartBeat !== [] &&
+              detailHeartBeat.map((item) => `${item.result}, `)}
+          </p>
+          <p>
+            <i>Chú thích:</i> T: Thấp, TB: Trung bình, C: Cao
+          </p>
           <Button
             block
             onClick={() =>
@@ -790,9 +836,18 @@ const Tab2 = () => {
             Hàm thành viên
           </Button>
         </div>
+
         <div className="max-w-xs m-auto">
           <p>Huyết áp</p>
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
+          <p>[T, TB, C]</p>
+          <p>
+            {detailBloodPressure !== [] &&
+              detailBloodPressure.map((item) => `${item.result}, `)}
+          </p>
+          <p>
+            <i>Chú thích:</i> T: Thấp, TB: Trung bình, C: Cao
+          </p>
           <Button
             block
             onClick={() =>
@@ -894,7 +949,13 @@ const Tab2 = () => {
       </div>
       <div className=" w-full">
         <div className="max-w-sm m-auto">
-          <h2>{minXHi && `Chỉ số sức khỏe của bạn là ${minXHi}`}</h2>
+          <p>Chỉ số sức khỏe của bạn là: {minXHi !== 10000 && minXHi}</p>
+          <p>{detail !== [] && detail.map((item) => `${item.label}, `)}</p>
+          <p>{detail !== [] && detail.map((item) => `${item.result}, `)}</p>
+          <p>
+            <i>Chú thích:</i> UH: Yếu, LH: Không khỏe lắm, SH: Có vẻ khỏe, H:
+            Khỏe
+          </p>
         </div>
       </div>
     </>

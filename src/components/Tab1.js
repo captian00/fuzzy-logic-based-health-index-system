@@ -203,9 +203,9 @@ const Tab1 = () => {
           </Button>
         </Form.Item>
       </Form>
-      <p>{`Chỉ số sức khỏe: ${kq}`}</p>
+      <p>Chỉ số sức khỏe của bạn là: {kq !== 10000 && kq}</p>
       {detail.map((item) => (
-        <p>{`Thuộc loại ${item.label}: ${item.result*100}%`}</p>
+        <p>{`Thuộc loại ${item.label}: ${item.result * 100}%`}</p>
       ))}
     </>
   );

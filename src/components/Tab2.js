@@ -654,8 +654,15 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalHeight}></Scatter>
           <p>f = [RT, T, TB, C, RC]</p>
           <p>
+            [{" "}
             {detailHeight !== [] &&
-              detailHeight.map((item) => `${item.result}, `)}
+              detailHeight.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
           </p>
           <p>
             <i>Chú thích:</i> RT: Rất thấp, T: Thấp, TB: Trung bình, C: Cao, RC:
@@ -693,8 +700,15 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalWeight}></Scatter>
           <p>f = [RN, N, TB, NA, RNA]</p>
           <p>
+            [{" "}
             {detailWeight !== [] &&
-              detailWeight.map((item) => `${item.result}, `)}
+              detailWeight.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
           </p>
           <p>
             <i>Chú thích:</i> RN: Nhẹ, N: Nhẹ, TB: Trung Bình, NA: Nặng, RNA:
@@ -765,7 +779,15 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalBMI2}></Scatter>
           <p>f = [TC, CD, TBP, BP]</p>
           <p>
-            {detailBMI !== [] && detailBMI.map((item) => `${item.result}, `)}
+            [{" "}
+            {detailBMI !== [] &&
+              detailBMI.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
           </p>
           <p>
             <i>Chú thích:</i> TC: Thiếu cân, CD: Cân đối, TBP: Tiền béo phì, BP:
@@ -804,8 +826,15 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
           <p>f = [T, TB, C]</p>
           <p>
+            [{" "}
             {detailHeartBeat !== [] &&
-              detailHeartBeat.map((item) => `${item.result}, `)}
+              detailHeartBeat.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
           </p>
           <p>
             <i>Chú thích:</i> T: Thấp, TB: Trung bình, C: Cao
@@ -841,8 +870,15 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
           <p>f = [T, TB, C]</p>
           <p>
+            [{" "}
             {detailBloodPressure !== [] &&
-              detailBloodPressure.map((item) => `${item.result}, `)}
+              detailBloodPressure.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
           </p>
           <p>
             <i>Chú thích:</i> T: Thấp, TB: Trung bình, C: Cao

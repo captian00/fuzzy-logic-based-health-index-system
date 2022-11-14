@@ -318,8 +318,8 @@ export const dataBMI = {
     {
       label: "Thiếu cân",
       data: [
-        {x:12,y:0},
-        { x: 16, y: 1 },
+        {x:1,y:0},
+        { x: 12, y: 1 },
         { x: 17, y: 1 },
         { x: 18.5, y: 0 },
       ],
@@ -398,8 +398,8 @@ export const dataBMI2 = {
     {
       label: "Thiếu cân",
       data: [
-        { x: 12, y: 0 },
-        { x: 16, y: 1 },
+        { x: 1, y: 0 },
+        { x: 12, y: 1 },
         { x: 17, y: 1 },
         { x: 18.5, y: 0 },
       ],

@@ -171,7 +171,6 @@ const Tab2 = () => {
     useState(null);
   useEffect(() => {
     if (weight && height && heartBeat && bloodPressure && submit) {
-      
       setStateResultHeartBeat(handleLogicHeartBeat(heartBeat));
       setStateResultBloodPressure(handleLogicBloodPressure(bloodPressure));
       setStateResultHeight(handleLogicHeight(height));
@@ -636,7 +635,7 @@ const Tab2 = () => {
     }
   }, [stateDataHIUpdate2]);
   setKQ(minXHi);
-  let detail =showDetail(minXHi)
+  let detail = showDetail(minXHi);
 
   let detailWeight = showDetailWeight(stateResultWeight);
   let detailHeight = showDetailHeight(stateResultHeight);
@@ -644,9 +643,9 @@ const Tab2 = () => {
   let detailHeartBeat = showDetailHeartBeat(stateResultHeartBeat);
   // console.log("detailHeartBeat", detailHeartBeat);
   let detailBloodPressure = showDetailBloodPressure(stateResultBloodPressure);
-  let detailBMI = showDetailBMI(stateResultBMI)
+  let detailBMI = showDetailBMI(stateResultBMI);
   //----------------------------------------------------------
-  
+
   return (
     <>
       <div className="grid grid-cols-2">
@@ -950,8 +949,18 @@ const Tab2 = () => {
       <div className=" w-full">
         <div className="max-w-sm m-auto">
           <p>Chỉ số sức khỏe của bạn là: {minXHi !== 10000 && minXHi}</p>
-          <p>f = [{detail !== [] && detail.map((item) => `${item.label}, `)}]</p>
-          <p>{detail !== [] && detail.map((item) => `${item.result}, `)}</p>
+          <p>f = [UH, LH, SH, H ]</p>
+          <p>
+            [{" "}
+            {detail !== [] &&
+              detail.reduce((a, b, index) => {
+                if (index === 0) {
+                  return b.result;
+                }
+                return `${a},${b.result}`;
+              }, "")}
+            ]
+          </p>
           <p>
             <i>Chú thích:</i> UH: Yếu, LH: Không khỏe lắm, SH: Có vẻ khỏe, H:
             Khỏe

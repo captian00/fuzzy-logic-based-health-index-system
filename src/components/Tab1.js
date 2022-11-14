@@ -39,7 +39,7 @@ const Tab1 = () => {
     if (kq < 25 && kq > 1) {
       arr = [...arr, { label: "Yếu", result: left(kq, 1, 25) }];
     }
-    if (kq === 25 ) {
+    if (kq === 25) {
       arr = [...arr, { label: "Yếu", result: 1 }];
     }
     if (kq < 35 && kq > 25) {
@@ -71,9 +71,9 @@ const Tab1 = () => {
     if (kq < 75 && kq > 70) {
       arr = [...arr, { label: "Có vẻ khỏe", result: left(kq, 55, 75) }];
     }
-     if (kq === 75) {
-       arr = [...arr, { label: "Có vẻ khỏe", result: 1 }];
-     }
+    if (kq === 75) {
+      arr = [...arr, { label: "Có vẻ khỏe", result: 1 }];
+    }
     if (kq < 80 && kq > 75) {
       arr = [...arr, { label: "Có vẻ khỏe", result: right(kq, 75, 85) }];
     }
@@ -121,7 +121,7 @@ const Tab1 = () => {
   }, [kq]);
   // console.log("detail: ", detail);
   return (
-    <>
+    <div className="grid grid-cols-2">
       <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
         <PageHeader style={{ fontSize: "20px", paddingTop: "1px" }}>
           Mời bạn nhập các thông tin
@@ -203,11 +203,13 @@ const Tab1 = () => {
           </Button>
         </Form.Item>
       </Form>
-      <p>Chỉ số sức khỏe của bạn là: {kq !== 10000 && kq}</p>
-      {detail.map((item) => (
-        <p>{`Thuộc loại ${item.label}: ${item.result * 100}%`}</p>
-      ))}
-    </>
+      <div className="text-lg">
+        <p>Chỉ số sức khỏe của bạn là: {kq !== 10000 && kq}</p>
+        {detail.map((item) => (
+          <p>{`Thuộc loại ${item.label}: ${item.result * 100}%`}</p>
+        ))}
+      </div>
+    </div>
   );
 };
 

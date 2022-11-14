@@ -654,7 +654,7 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalHeight}></Scatter>
           <p>f = [RT, T, TB, C, RC]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detailHeight !== [] &&
               detailHeight.reduce((a, b, index) => {
                 if (index === 0) {
@@ -700,7 +700,7 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalWeight}></Scatter>
           <p>f = [RN, N, TB, NA, RNA]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detailWeight !== [] &&
               detailWeight.reduce((a, b, index) => {
                 if (index === 0) {
@@ -779,7 +779,7 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalBMI2}></Scatter>
           <p>f = [TC, CD, TBP, BP]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detailBMI !== [] &&
               detailBMI.reduce((a, b, index) => {
                 if (index === 0) {
@@ -826,7 +826,7 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalHeartBeat}></Scatter>
           <p>f = [T, TB, C]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detailHeartBeat !== [] &&
               detailHeartBeat.reduce((a, b, index) => {
                 if (index === 0) {
@@ -870,7 +870,7 @@ const Tab2 = () => {
           <Scatter options={options} data={dataFinalBloodPressure}></Scatter>
           <p>f = [T, TB, C]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detailBloodPressure !== [] &&
               detailBloodPressure.reduce((a, b, index) => {
                 if (index === 0) {
@@ -987,7 +987,7 @@ const Tab2 = () => {
           <p>Chỉ số sức khỏe của bạn là: {minXHi !== 10000 && minXHi}</p>
           <p>f = [UH, LH, SH, H ]</p>
           <p>
-            [{" "}
+            f = [{" "}
             {detail !== [] &&
               detail.reduce((a, b, index) => {
                 if (index === 0) {

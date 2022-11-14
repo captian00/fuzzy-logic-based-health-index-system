@@ -12,6 +12,10 @@ const Main = () => {
   const [bloodPressure, setBloodPressure] = useState(0);
   const [submit, setSubmit] = useState(false);
   const [kq, setKQ] = useState();
+  const [key, setKey] = useState("1");
+  const ChangeTab = (currentKey) => {
+    setKey(currentKey);
+  };
   return (
     <div className="mx-auto max-w-6xl border-dashed border-2 border-indigo-600 h-full bg-slate-200">
       <div className="items-center justyfind-center">
@@ -29,9 +33,13 @@ const Main = () => {
             setBloodPressure,
             setSubmit,
             setKQ,
+            setKey,
           }}
         >
-          <Tabs defaultActiveKey="1">
+          <Tabs
+            activeKey={key}
+            onChange={(currentKey) => ChangeTab(currentKey)}
+          >
             <Tabs.TabPane tab="Nhập thông tin" key="1">
               <Tab1 />
             </Tabs.TabPane>

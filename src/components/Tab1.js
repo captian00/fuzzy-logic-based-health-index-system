@@ -20,6 +20,7 @@ const Tab1 = () => {
     setBloodPressure,
     setSubmit,
     kq,
+    setKey,
   } = useMainContext();
   const [detail, setDetail] = useState([]);
 
@@ -98,6 +99,7 @@ const Tab1 = () => {
   };
   const onFinish = (values) => {
     setSubmit(true);
+    setKey("2");
   };
 
   const onReset = () => {

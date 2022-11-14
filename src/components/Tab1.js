@@ -204,6 +204,7 @@ const Tab1 = () => {
         </Form.Item>
       </Form>
       <div className="text-lg">
+        <p className="text-xl">Kết quả</p>
         <p>Chỉ số sức khỏe của bạn là: {kq !== 10000 && kq}</p>
         {detail.map((item) => (
           <p>{`Thuộc loại ${item.label}: ${item.result * 100}%`}</p>
